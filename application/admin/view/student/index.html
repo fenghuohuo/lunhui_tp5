@@ -36,8 +36,8 @@
                                             {$vo.room}<br/>
                                             {$vo.cname}
                                         </td>
-                                        <td class="text-right">
-                                            <button type="button" name="edit" class="btn btn-warning" >修改</button><br/>
+                                        <td class="text-left" style="width: 50px">
+                                            <button type="button" name="edit" class="btn btn-warning" >修改</button>
                                             <button type="button" name="delete" class="btn btn-danger">删除</button>
                                         </td>
                                     {/if}
@@ -65,8 +65,8 @@
                                             {$vo.room}<br/>
                                             {$vo.cname}
                                         </td>
-                                        <td class="text-right">
-                                            <button type="button" name="edit" class="btn btn-warning">修改</button><br/>
+                                        <td class="text-right" style="width: 50px">
+                                            <button type="button" name="edit" class="btn btn-warning">修改</button>
                                             <button type="button" name="delete" class="btn btn-danger">删除</button>
                                         </td>
                                     {/if}
@@ -95,8 +95,8 @@
                                             {$vo.room}<br/>
                                             {$vo.cname}
                                         </td>
-                                        <td class="text-right">
-                                            <button type="button" name="edit" class="btn btn-warning">修改</button><br/>
+                                        <td class="text-right" style="width: 50px">
+                                            <button type="button" name="edit" class="btn btn-warning">修改</button>
                                             <button type="button" name="delete" class="btn btn-danger">删除</button>
                                         </td>
                                     {/if}
@@ -124,8 +124,8 @@
                                             {$vo.room}<br/>
                                             {$vo.cname}
                                         </td>
-                                        <td class="text-right">
-                                            <button type="button" name="edit" class="btn btn-warning">修改</button><br/>
+                                        <td class="text-right" style="width: 50px">
+                                            <button type="button" name="edit" class="btn btn-warning">修改</button>
                                             <button type="button" name="delete" class="btn btn-danger">删除</button>
                                         </td>
                                     {/if}
@@ -153,8 +153,8 @@
                                             {$vo.room}<br/>
                                             {$vo.cname}
                                         </td>
-                                        <td class="text-right">
-                                            <button type="button" name="edit" class="btn btn-warning">修改</button><br/>
+                                        <td class="text-right" style="width: 50px">
+                                            <button type="button" name="edit" class="btn btn-warning">修改</button>
                                             <button type="button" name="delete" class="btn btn-danger">删除</button>
                                         </td>
                                     {/if}
@@ -223,6 +223,25 @@
                 }
             });
         })
+
+        $("[name='edit']").click( function (){
+            var data = $('this').parent.("td:first").val;
+            console.log(data);
+            layer.open({
+                type:2,
+                area:['600px','350px'],
+                title:'修改课程',
+                shade:0.6,
+                anim:2,
+                content:'{:url("student/editView", [])}',
+                yes : function(layero, index) {
+                    $(layero).find("input").each(function(i, v) {
+                        alert($(v).text());
+                    });
+                    layer.close(index);
+                }
+            })
+        });
     })
 </script>
 

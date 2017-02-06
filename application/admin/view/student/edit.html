@@ -1,0 +1,204 @@
+{include file="public/header" /}
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+    <form class="form" role="form" >
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">课程</div>
+                <select id="getCourse" class="select2-search__field form-control" name="course" >
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">班级</div>
+                <select id="getClass" class="select2-search__field form-control" name="class">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">教室</div>
+                <select id="getRoom" class="select2-search__field form-control" name="room">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">教师</div>
+                <select id="getTeacher" class="select2-search__field form-control" name="teacher">
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="input-group">
+                <div class="input-group-addon">是否单双周</div>
+                <div class="switch"  >
+                    <input id="isDouble" type="checkbox" name="isDouble" value="true"/>
+                </div>
+            </div>
+        </div>
+        <button type="button" class="btn btn-info">确定</button>
+    </form>
+</div>
+</body>
+{include file="public/footer" /}
+
+<script type="text/javascript">
+
+    $(function () {
+
+        toastr.options.positionClass = 'toast-bottom-center';
+        /**
+         * @name 课程选择
+         */
+        $("#getCourse").select2({
+            placeholder: "选择课程",
+            multiple: false,
+            tags: true,
+            ajax: {
+                url: '{:url("student/getCourse")}',
+                dataType: 'json',
+                delay: 50,
+                data: function (item) {
+                    return {
+                        item: item,
+                    }
+                },
+                processResults: function (data, page) {
+                    return {
+                        results: data
+                    }
+                },
+                cache: true
+            },
+            minimumInputLength: 0,
+            templateResult: function(item){ return '<span style="font-size:8px">' + item .text + '</span>'},
+            templateSelection: function(item) { return item.text },
+            escapeMarkup: function (markup) { return markup;},
+        });
+
+        $("#getClass").select2({
+            placeholder: "选择班级",
+            multiple: false,
+            tags: true,
+            ajax: {
+                url: '{:url("student/getClass")}',
+                dataType: 'json',
+                delay: 50,
+                data: function (item) {
+                    return item
+                },
+                processResults: function (data, page) {
+                    return {
+                        results: data
+                    }
+                },
+                cache: true
+            },
+            minimumInputLength: 0,
+            templateResult: function(item){ return '<span style="font-size:8px">' + item .text + '</span>'},
+            templateSelection: function(item) { return item.text },
+            escapeMarkup: function (markup) { return markup;},
+        });
+
+        $("#getTeacher").select2({
+            placeholder: "选择教师",
+            multiple: false,
+            tags: true,
+            ajax: {
+                url: '{:url("student/getTeacher")}',
+                dataType: 'json',
+                delay: 50,
+                type: 'get',
+                data: function (item) {
+                    return {
+                        item: item,
+                        num: $("#getCourse").val()
+                    }
+                },
+                processResults: function (data, page) {
+                    return {
+                        results: data
+                    }
+                },
+                cache: true
+            },
+            minimumInputLength: 0,
+            templateResult: function(item){ return '<span style="font-size:8px">' + item .text + '</span>'},
+            templateSelection: function(item) { return item.text },
+            escapeMarkup: function (markup) { return markup;},
+        });
+
+        $("#getRoom").select2({
+            placeholder: "选择教室",
+            multiple: false,
+            tags: true,
+            ajax: {
+                url: '{:url("student/getRoom")}',
+                dataType: 'json',
+                delay: 50,
+                type: 'get',
+                data: function (item) {
+                    return {
+                        item: item,
+                        weeks: $("[name = 'week']").select2('val'),
+                        parts: $("[name = 'part']").select2('val'),
+                    }
+                },
+                processResults: function (data, page) {
+                    return {
+                        results: data
+                    }
+                },
+                cache: true
+            },
+            minimumInputLength: 0,
+            templateResult: function(item){ return '<span style="font-size:8px">' + item .text + '</span>'},
+            templateSelection: function(item) { return item.text },
+            escapeMarkup: function (markup) { return markup;},
+        });
+
+        $("#isDouble").bootstrapSwitch({
+            onText:"单周",
+            offText:"双周",
+            onColor:"info",
+            offColor:"success",
+            onSwitchChange:function(event, state){
+                if(state==true){
+                    $(this).val(false);
+                }else{
+                    $(this).val(true);
+                }
+            }
+        })
+
+        $("button").click(function() {
+            var p = parent.$("this");
+            console.log(p);
+            $.ajax({
+                url: '{:url("student/edit")}',
+                type: 'post',
+                dataType: 'json',
+                asycn: 'true',
+                data: {
+                    'course': $("[name = 'course']").val(),
+                    'teacher': $("[name = 'teacher']").val(),
+                    'isDouble': $("[name = 'isDouble']").val(),
+                    'class': $("[name = 'class']").val(),
+                    'room': $("[name = 'room']").val(),
+                },
+                success: function(data) {
+                    if (data.code < 0)
+                        toastr.error(data.code, data.message);
+                    else
+                        toastr.success(data.message);
+                },
+                error: function(data) {
+                    return data;
+                }
+            });
+        });
+
+    })
+</script>

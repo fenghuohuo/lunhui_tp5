@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1486367120;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1486374808;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -26,26 +26,7 @@
     }
     </style>
 </head>
-<div>
-    <div class="container">
-        <h2>使用Bootstrap创建模态框</h2>
-        <div id="example" class="modal hide fade in" style="display: none; ">
-            <div class="modal-header">
-                <a class="close" data-dismiss="modal">×</a>
-                <h3>这是一个模态框标题</h3>
-            </div>
-            <div class="modal-body">
-                <h4>模态框中的文本</h4>
-                <p>你可以在这添加一些文本。</p>
-            </div>
-            <div class="modal-footer">
-                <a href="#" class="btn btn-success">唤醒活动</a>
-                <a href="#" class="btn" data-dismiss="modal">关闭</a>
-            </div>
-        </div>
-        <p><a data-toggle="modal" href="#example" class="btn btn-primary btn-large">发动演示模态框</a></p>
-    </div>
-</div>
+
 <body class="gray-bg">
     <div class="form-group" style="width: 200px; background-color: gray;">
         <div class="input-group">
@@ -80,8 +61,8 @@
                                             <?php echo $vo['room']; ?><br/>
                                             <?php echo $vo['cname']; ?>
                                         </td>
-                                        <td class="text-right">
-                                            <button type="button" name="edit" class="btn btn-warning" >修改</button><br/>
+                                        <td class="text-left" style="width: 50px">
+                                            <button type="button" name="edit" class="btn btn-warning" >修改</button>
                                             <button type="button" name="delete" class="btn btn-danger">删除</button>
                                         </td>
                                     <?php endif; if(empty($vo)): ?>
@@ -103,8 +84,8 @@
                                             <?php echo $vo['room']; ?><br/>
                                             <?php echo $vo['cname']; ?>
                                         </td>
-                                        <td class="text-right">
-                                            <button type="button" name="edit" class="btn btn-warning">修改</button><br/>
+                                        <td class="text-right" style="width: 50px">
+                                            <button type="button" name="edit" class="btn btn-warning">修改</button>
                                             <button type="button" name="delete" class="btn btn-danger">删除</button>
                                         </td>
                                     <?php endif; if(empty($vo)): ?>
@@ -127,8 +108,8 @@
                                             <?php echo $vo['room']; ?><br/>
                                             <?php echo $vo['cname']; ?>
                                         </td>
-                                        <td class="text-right">
-                                            <button type="button" name="edit" class="btn btn-warning">修改</button><br/>
+                                        <td class="text-right" style="width: 50px">
+                                            <button type="button" name="edit" class="btn btn-warning">修改</button>
                                             <button type="button" name="delete" class="btn btn-danger">删除</button>
                                         </td>
                                     <?php endif; if(empty($vo)): ?>
@@ -150,8 +131,8 @@
                                             <?php echo $vo['room']; ?><br/>
                                             <?php echo $vo['cname']; ?>
                                         </td>
-                                        <td class="text-right">
-                                            <button type="button" name="edit" class="btn btn-warning">修改</button><br/>
+                                        <td class="text-right" style="width: 50px">
+                                            <button type="button" name="edit" class="btn btn-warning">修改</button>
                                             <button type="button" name="delete" class="btn btn-danger">删除</button>
                                         </td>
                                     <?php endif; if(empty($vo)): ?>
@@ -173,8 +154,8 @@
                                             <?php echo $vo['room']; ?><br/>
                                             <?php echo $vo['cname']; ?>
                                         </td>
-                                        <td class="text-right">
-                                            <button type="button" name="edit" class="btn btn-warning">修改</button><br/>
+                                        <td class="text-right" style="width: 50px">
+                                            <button type="button" name="edit" class="btn btn-warning">修改</button>
                                             <button type="button" name="delete" class="btn btn-danger">删除</button>
                                         </td>
                                     <?php endif; if(empty($vo)): ?>
@@ -259,6 +240,25 @@
                 }
             });
         })
+
+        $("[name='edit']").click( function (){
+            var data = $('this').parent.("td:first").val;
+            console.log(data);
+            layer.open({
+                type:2,
+                area:['600px','350px'],
+                title:'修改课程',
+                shade:0.6,
+                anim:2,
+                content:'<?php echo url("student/editView", []); ?>',
+                yes : function(layero, index) {
+                    $(layero).find("input").each(function(i, v) {
+                        alert($(v).text());
+                    });
+                    layer.close(index);
+                }
+            })
+        });
     })
 </script>
 

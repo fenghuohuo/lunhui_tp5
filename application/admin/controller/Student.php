@@ -93,6 +93,35 @@ class Student extends Base
         ];
     }
 
+    /**
+     * @name 修改视图
+     * @return mixed
+     */
+    public function editView()
+    {
+        return $this->fetch('edit');
+    }
+
+    /**
+     * @name 课程修改
+     * @return array
+     */
+    public function edit()
+    {
+        $course = isset($_POST['course']) ? $_POST['course'] : '';
+        $teacher = isset($_POST['teacher']) ? $_POST['teacher'] : '';
+        $room = isset($_POST['room']) ? $_POST['room'] : '';
+        $isDouble = isset($_POST['isDouble']) ? $_POST['isDouble'] : '';//暂时未添加
+        $class = isset($_POST['class']) ? $_POST['class'] : '';
+
+
+
+        return $success = [
+            'code' => -1,
+            'message' => "保存成功!"
+        ];
+    }
+
 
     /**
      * @name 获取课程
