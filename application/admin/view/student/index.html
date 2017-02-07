@@ -237,7 +237,7 @@
                 content:'{:url("student/editView")}',
                 yes : function(index, layero) {
                     var data = $(layero).find("iframe")[0].contentWindow.getData();
-                    if (data['course'] || data['teacher'] ||data['class'] || data['room']) {
+                    if (data['course'] && data['teacher'] && data['class'] && data['room']) {
                         $.ajax({
                             url: '{:url("student/edit")}',
                             type: 'post',

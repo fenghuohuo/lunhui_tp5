@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1486455167;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1486456550;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -243,7 +243,7 @@
         });
 
         $("[name='edit']").click( function (){
-//            $(this).parent().prev().find("[name='time']").text();
+            var time = $(this).parent().prev().find("[name='time']").text();
             layer.open({
                 type:2,
                 area:['600px','350px'],
@@ -254,13 +254,14 @@
                 content:'<?php echo url("student/editView"); ?>',
                 yes : function(index, layero) {
                     var data = $(layero).find("iframe")[0].contentWindow.getData();
-                    if (data['course'] || data['teacher'] ||data['class'] || data['room']) {
+                    if (data['course'] && data['teacher'] && data['class'] && data['room']) {
                         $.ajax({
                             url: '<?php echo url("student/edit"); ?>',
                             type: 'post',
                             dataType: 'json',
                             asycn: 'true',
                             data: {
+                                'time' : time,
                                 'course': $("[name = 'course']").val(),
                                 'teacher': $("[name = 'teacher']").val(),
                                 'isDouble': $("[name = 'isDouble']").val(),

@@ -114,20 +114,40 @@ class Student extends Base
         $room = isset($_POST['room']) ? $_POST['room'] : '';
         $isDouble = isset($_POST['isDouble']) ? $_POST['isDouble'] : '';//暂时未添加
         $class = isset($_POST['class']) ? $_POST['class'] : '';
+        $time = explode(" ", $time);
 
-        if ($time) {
-            return $result = [
+        if (count($time) != 2) {
+            return $error = [
                 'code' => -1,
                 'message' => "time异常!"
             ];
         }
 
-        $time = explode(' ', $time);
         $week = $time[0];
         $num = $time[1];
 
+        $timeTable = new TimeTableModel();
+        $timeTable = $timeTable
+            ->where('week', $week)
+            ->where('num', $num)
+            ->find();
+
+        $timeTable->cid = $course;
+        $timeTable->classid = $class;
+        $timeTable->room = $room;
+        $timeTable->tid = $teacher;
+
+        try {
+            $ret = $timeTable->save();
+        } catch (\Exception $e) {
+            return $error = [
+                'code' => $e->getCode(),
+                'message' => "保存失败：" . $e->getMessage()
+            ];
+        }
+
         return $success = [
-            'code' => -1,
+            'code' => 1,
             'message' => "保存成功!"
         ];
     }
