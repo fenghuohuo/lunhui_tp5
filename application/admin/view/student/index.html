@@ -35,9 +35,10 @@
                                         <td>
                                             {$vo.room}<br/>
                                             {$vo.cname}
+                                            <div style="display: none" name="time">{$vo.week . " " . $vo.num}</div>
                                         </td>
                                         <td class="text-left" style="width: 50px">
-                                            <button type="button" name="edit" class="btn btn-warning" >修改</button>
+                                            <button type="button" name="edit" class="btn btn-warning"  value="1">修改</button>
                                             <button type="button" name="delete" class="btn btn-danger">删除</button>
                                         </td>
                                     {/if}
@@ -222,26 +223,57 @@
                     $("body").html(data);
                 }
             });
-        })
+        });
 
         $("[name='edit']").click( function (){
-            var data = $('this').parent.("td:first").val;
-            console.log(data);
+            var time = $(this).parent().prev().find("[name='time']").text();
             layer.open({
                 type:2,
                 area:['600px','350px'],
                 title:'修改课程',
                 shade:0.6,
                 anim:2,
-                content:'{:url("student/editView", [])}',
-                yes : function(layero, index) {
-                    $(layero).find("input").each(function(i, v) {
-                        alert($(v).text());
-                    });
-                    layer.close(index);
+                btn: ['确定', '取消'],
+                content:'{:url("student/editView")}',
+                yes : function(index, layero) {
+                    var data = $(layero).find("iframe")[0].contentWindow.getData();
+                    if (data['course'] || data['teacher'] ||data['class'] || data['room']) {
+                        $.ajax({
+                            url: '{:url("student/edit")}',
+                            type: 'post',
+                            dataType: 'json',
+                            asycn: 'true',
+                            data: {
+                                'time' : time,
+                                'course': $("[name = 'course']").val(),
+                                'teacher': $("[name = 'teacher']").val(),
+                                'isDouble': $("[name = 'isDouble']").val(),
+                                'class': $("[name = 'class']").val(),
+                                'room': $("[name = 'room']").val(),
+                            },
+                            success: function(data) {
+                                if (data.code < 0)
+                                    $(layero).find("iframe")[0].contentWindow.error(data);
+                                else
+                                    $(layero).find("iframe")[0].contentWindow.sucess(data);
+                            },
+                            error: function(data) {
+                                return data;
+                            }
+                        });
+                    } else {
+                        toastr.error("请输入数据！");
+                        layer.close(index);
+                    }
+
+                },
+                no : function (index, layero) {
+                    layer.close(layero);
                 }
             })
         });
+
     })
+
 </script>
 

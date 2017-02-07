@@ -108,13 +108,23 @@ class Student extends Base
      */
     public function edit()
     {
+        $time = isset($_POST['time']) ? $_POST['time'] : '';
         $course = isset($_POST['course']) ? $_POST['course'] : '';
         $teacher = isset($_POST['teacher']) ? $_POST['teacher'] : '';
         $room = isset($_POST['room']) ? $_POST['room'] : '';
         $isDouble = isset($_POST['isDouble']) ? $_POST['isDouble'] : '';//暂时未添加
         $class = isset($_POST['class']) ? $_POST['class'] : '';
 
+        if ($time) {
+            return $result = [
+                'code' => -1,
+                'message' => "time异常!"
+            ];
+        }
 
+        $time = explode(' ', $time);
+        $week = $time[0];
+        $num = $time[1];
 
         return $success = [
             'code' => -1,

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1486374808;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1486455167;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -60,9 +60,10 @@
                                         <td>
                                             <?php echo $vo['room']; ?><br/>
                                             <?php echo $vo['cname']; ?>
+                                            <div style="display: none" name="time"><?php echo $vo['week'] . " " . $vo['num']; ?></div>
                                         </td>
                                         <td class="text-left" style="width: 50px">
-                                            <button type="button" name="edit" class="btn btn-warning" >修改</button>
+                                            <button type="button" name="edit" class="btn btn-warning"  value="1">修改</button>
                                             <button type="button" name="delete" class="btn btn-danger">删除</button>
                                         </td>
                                     <?php endif; if(empty($vo)): ?>
@@ -239,26 +240,56 @@
                     $("body").html(data);
                 }
             });
-        })
+        });
 
         $("[name='edit']").click( function (){
-            var data = $('this').parent.("td:first").val;
-            console.log(data);
+//            $(this).parent().prev().find("[name='time']").text();
             layer.open({
                 type:2,
                 area:['600px','350px'],
                 title:'修改课程',
                 shade:0.6,
                 anim:2,
-                content:'<?php echo url("student/editView", []); ?>',
-                yes : function(layero, index) {
-                    $(layero).find("input").each(function(i, v) {
-                        alert($(v).text());
-                    });
-                    layer.close(index);
+                btn: ['确定', '取消'],
+                content:'<?php echo url("student/editView"); ?>',
+                yes : function(index, layero) {
+                    var data = $(layero).find("iframe")[0].contentWindow.getData();
+                    if (data['course'] || data['teacher'] ||data['class'] || data['room']) {
+                        $.ajax({
+                            url: '<?php echo url("student/edit"); ?>',
+                            type: 'post',
+                            dataType: 'json',
+                            asycn: 'true',
+                            data: {
+                                'course': $("[name = 'course']").val(),
+                                'teacher': $("[name = 'teacher']").val(),
+                                'isDouble': $("[name = 'isDouble']").val(),
+                                'class': $("[name = 'class']").val(),
+                                'room': $("[name = 'room']").val(),
+                            },
+                            success: function(data) {
+                                if (data.code < 0)
+                                    $(layero).find("iframe")[0].contentWindow.error(data);
+                                else
+                                    $(layero).find("iframe")[0].contentWindow.sucess(data);
+                            },
+                            error: function(data) {
+                                return data;
+                            }
+                        });
+                    } else {
+                        toastr.error("请输入数据！");
+                        layer.close(index);
+                    }
+
+                },
+                no : function (index, layero) {
+                    layer.close(layero);
                 }
             })
         });
+
     })
+
 </script>
 

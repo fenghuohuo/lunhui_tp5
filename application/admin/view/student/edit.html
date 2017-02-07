@@ -1,7 +1,7 @@
 {include file="public/header" /}
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
-    <form class="form" role="form" >
+    <form class="form" role="form" name="editData" >
         <div class="form-group">
             <div class="input-group">
                 <div class="input-group-addon">课程</div>
@@ -38,15 +38,39 @@
                 </div>
             </div>
         </div>
-        <button type="button" class="btn btn-info">确定</button>
     </form>
 </div>
 </body>
 {include file="public/footer" /}
 
 <script type="text/javascript">
+    /**
+     * 日常记录
+     * 父容器调用子iframe方法 需要先加载
+     */
+    var getData = function (){
+        var data = new Array();
 
-    $(function () {
+        data['course'] = $("[name = 'course']").val();
+        data['teacher'] = $("[name = 'teacher']").val();
+        data['isDouble'] = $("[name = 'isDouble']").val();
+        data['class'] = $("[name = 'class']").val();
+        data['room'] = $("[name = 'room']").val();
+
+        return data;
+    };
+
+    var success = function (data){
+        toastr.success(data.code, data.message);
+    }
+
+    var error = function (data){
+        toastr.error(data.code, data.message);
+    }
+</script>
+<script type="text/javascript">
+
+    $(document).ready(function () {
 
         toastr.options.positionClass = 'toast-bottom-center';
         /**
@@ -173,32 +197,6 @@
             }
         })
 
-        $("button").click(function() {
-            var p = parent.$("this");
-            console.log(p);
-            $.ajax({
-                url: '{:url("student/edit")}',
-                type: 'post',
-                dataType: 'json',
-                asycn: 'true',
-                data: {
-                    'course': $("[name = 'course']").val(),
-                    'teacher': $("[name = 'teacher']").val(),
-                    'isDouble': $("[name = 'isDouble']").val(),
-                    'class': $("[name = 'class']").val(),
-                    'room': $("[name = 'room']").val(),
-                },
-                success: function(data) {
-                    if (data.code < 0)
-                        toastr.error(data.code, data.message);
-                    else
-                        toastr.success(data.message);
-                },
-                error: function(data) {
-                    return data;
-                }
-            });
-        });
 
     })
 </script>
