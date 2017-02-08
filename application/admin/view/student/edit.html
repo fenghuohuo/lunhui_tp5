@@ -60,10 +60,6 @@
         return data;
     };
 
-    var success = function (data){
-        toastr.success(data.code, data.message);
-    }
-
     var error = function (data){
         toastr.error(data.code, data.message);
     }
@@ -72,6 +68,7 @@
 
     $(document).ready(function () {
 
+        var list = $.parseJSON('{$list}');
         toastr.options.positionClass = 'toast-bottom-center';
         /**
          * @name 课程选择
@@ -101,6 +98,7 @@
             templateSelection: function(item) { return item.text },
             escapeMarkup: function (markup) { return markup;},
         });
+        $("#getCourse").html("<option value=" + list.course.id + ">" + list.course.text + "</option>");
 
         $("#getClass").select2({
             placeholder: "选择班级",
@@ -125,6 +123,7 @@
             templateSelection: function(item) { return item.text },
             escapeMarkup: function (markup) { return markup;},
         });
+        $("#getClass").html("<option value=" + list.class.id + ">" + list.class.text + "</option>");
 
         $("#getTeacher").select2({
             placeholder: "选择教师",
@@ -153,6 +152,7 @@
             templateSelection: function(item) { return item.text },
             escapeMarkup: function (markup) { return markup;},
         });
+        $("#getTeacher").html("<option value=" + list.teacher.id + ">" + list.teacher.text + "</option>");
 
         $("#getRoom").select2({
             placeholder: "选择教室",
@@ -182,6 +182,7 @@
             templateSelection: function(item) { return item.text },
             escapeMarkup: function (markup) { return markup;},
         });
+        $("#getRoom").html("<option value=" + list.room.id + ">" + list.room.text + "</option>");
 
         $("#isDouble").bootstrapSwitch({
             onText:"单周",
@@ -196,6 +197,7 @@
                 }
             }
         })
+
 
     })
 </script>

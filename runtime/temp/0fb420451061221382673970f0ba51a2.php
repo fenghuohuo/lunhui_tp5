@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1486456550;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1486526264;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -84,6 +84,7 @@
                                         <td>
                                             <?php echo $vo['room']; ?><br/>
                                             <?php echo $vo['cname']; ?>
+                                            <div style="display: none" name="time"><?php echo $vo['week'] . " " . $vo['num']; ?></div>
                                         </td>
                                         <td class="text-right" style="width: 50px">
                                             <button type="button" name="edit" class="btn btn-warning">修改</button>
@@ -108,6 +109,7 @@
                                         <td>
                                             <?php echo $vo['room']; ?><br/>
                                             <?php echo $vo['cname']; ?>
+                                            <div style="display: none" name="time"><?php echo $vo['week'] . " " . $vo['num']; ?></div>
                                         </td>
                                         <td class="text-right" style="width: 50px">
                                             <button type="button" name="edit" class="btn btn-warning">修改</button>
@@ -131,6 +133,7 @@
                                         <td>
                                             <?php echo $vo['room']; ?><br/>
                                             <?php echo $vo['cname']; ?>
+                                            <div style="display: none" name="time"><?php echo $vo['week'] . " " . $vo['num']; ?></div>
                                         </td>
                                         <td class="text-right" style="width: 50px">
                                             <button type="button" name="edit" class="btn btn-warning">修改</button>
@@ -154,6 +157,7 @@
                                         <td>
                                             <?php echo $vo['room']; ?><br/>
                                             <?php echo $vo['cname']; ?>
+                                            <div style="display: none" name="time"><?php echo $vo['week'] . " " . $vo['num']; ?></div>
                                         </td>
                                         <td class="text-right" style="width: 50px">
                                             <button type="button" name="edit" class="btn btn-warning">修改</button>
@@ -178,6 +182,7 @@
     </div>
 </div>
 </body>
+
 <script src="/static/admin/js/jquery.min.js?v=2.1.4"></script>
 <script src="/static/admin/js/bootstrap.min.js?v=3.3.6"></script>
 <script src="/static/admin/js/content.min.js?v=1.0.0"></script>
@@ -242,8 +247,11 @@
             });
         });
 
+        //修改按钮
         $("[name='edit']").click( function (){
             var time = $(this).parent().prev().find("[name='time']").text();
+            var url = '<?php echo url("student/editView"); ?>' + "?time=" + time;
+
             layer.open({
                 type:2,
                 area:['600px','350px'],
@@ -251,9 +259,12 @@
                 shade:0.6,
                 anim:2,
                 btn: ['确定', '取消'],
-                content:'<?php echo url("student/editView"); ?>',
+                content:url,
                 yes : function(index, layero) {
                     var data = $(layero).find("iframe")[0].contentWindow.getData();
+                    function error(code){
+                        $(layero).find("iframe")[0].contentWindow.error(code);
+                    } 
                     if (data['course'] && data['teacher'] && data['class'] && data['room']) {
                         $.ajax({
                             url: '<?php echo url("student/edit"); ?>',
@@ -262,17 +273,32 @@
                             asycn: 'true',
                             data: {
                                 'time' : time,
-                                'course': $("[name = 'course']").val(),
-                                'teacher': $("[name = 'teacher']").val(),
-                                'isDouble': $("[name = 'isDouble']").val(),
-                                'class': $("[name = 'class']").val(),
-                                'room': $("[name = 'room']").val(),
+                                'course': data['course'],
+                                'teacher': data['teacher'],
+                                'isDouble': data['isDouble'],
+                                'class': data['class'],
+                                'room': data['room'],
                             },
                             success: function(data) {
-                                if (data.code < 0)
-                                    $(layero).find("iframe")[0].contentWindow.error(data);
-                                else
-                                    $(layero).find("iframe")[0].contentWindow.sucess(data);
+                                toastr.options.positionClass = 'toast-bottom-center';
+                                if (data.code < 0) {
+                                    error(data);
+                                } else {
+                                    toastr.success(data.message);
+                                    layer.close(index);
+                                }
+                                var Class = $(this).val();
+                                $.ajax({
+                                    url: '<?php echo url("student/index"); ?>',
+                                    type: 'get',
+                                    dataType: 'json',
+                                    data: {
+                                        class: Class,
+                                    },
+                                    success: function(data) {
+                                        $("body").html(data);
+                                    }
+                                });
                             },
                             error: function(data) {
                                 return data;
@@ -282,13 +308,17 @@
                         toastr.error("请输入数据！");
                         layer.close(index);
                     }
-
                 },
                 no : function (index, layero) {
                     layer.close(layero);
                 }
-            })
+            });
         });
+
+        //删除按钮
+        // $("[name='delete']").click(function (){
+
+        // })
 
     })
 

@@ -99,6 +99,61 @@ class Student extends Base
      */
     public function editView()
     {
+        $time = $_GET['time'];
+        $time = explode(" ", $time);
+
+        if (count($time) != 2) {
+            return $error = [
+                'code' => -1,
+                'message' => "time异常!"
+            ];
+        }
+
+        $week = $time[0];
+        $num = $time[1];
+
+        $timeTable = new TimeTableModel();
+        $timeTable = $timeTable
+            ->where('week', $week)
+            ->where('num', $num)
+            ->find();
+
+        if ($timeTable) {
+            $cid = $timeTable->cid;
+            $cname = CourseModel::get(['cid' => $cid]);
+            $classid = $timeTable->classid;
+            $class = ClassModel::get(['id' => $classid]);
+            $roomid = $timeTable->room;
+            $room = RoomModel::get(['id' => $roomid]);
+            $tid = $timeTable->tid;
+            $teacher = TeacherModel::get(['id' => $tid]);
+            $list = [
+                'course' => [
+                    'id' => $timeTable->cid,
+                    'text' => $cname->cname,
+                ],
+                'class' => [
+                    'id' => $timeTable->classid,
+                    'text' => $class->major . $class->class,
+                ],
+                'room' => [
+                    'id' => $timeTable->room,
+                    'text' => $room->room,
+                ],
+                'teacher' => [
+                    'id' => $timeTable->tid,
+                    'text' => $teacher->name,
+                ],
+            ];
+        } else {
+            return $error = [
+                'code' => -1,
+                'message' => "改时间无课程，请先添加!"
+            ];
+        }
+
+
+        $this->assign('list', json_encode($list));
         return $this->fetch('edit');
     }
 
