@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:70:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\insert.html";i:1486454085;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:70:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\insert.html";i:1486623647;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -274,7 +274,10 @@ $(function () {
                 'room': $("[name = 'room']").val(),
             },
             success: function(data) {
-                toastr.error(data.code, data.message);
+                if (data.code < 0)
+                    toastr.error(data.code, data.message);
+                else
+                    toastr.success(data.message);
             },
             error: function(data) {
                 return data;

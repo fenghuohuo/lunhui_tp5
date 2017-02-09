@@ -227,7 +227,10 @@ $(function () {
                 'room': $("[name = 'room']").val(),
             },
             success: function(data) {
-                toastr.error(data.code, data.message);
+                if (data.code < 0)
+                    toastr.error(data.code, data.message);
+                else
+                    toastr.success(data.message);
             },
             error: function(data) {
                 return data;

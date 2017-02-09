@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:68:"D:\WWW\lunhui_tp5\public/../application/admin\view\role\roleadd.html";i:1477268745;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1477268745;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1477268745;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:68:"D:\WWW\lunhui_tp5\public/../application/admin\view\role\roleadd.html";i:1477268745;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,6 +13,9 @@
     <link href="/static/admin/css/plugins/switchery/switchery.css" rel="stylesheet">
     <link href="/static/admin/css/style.min.css?v=4.1.0" rel="stylesheet">
     <link href="/static/admin/css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="__CSS__/select2.css" rel="stylesheet">
+    <link href="__CSS__/toastr.min.css" rel="stylesheet">
+    <link href="__CSS__/bootstrap-switch/bootstrap3/bootstrap-switch.min.css" rel="stylesheet">
 
     <style type="text/css">
     .long-tr th{
@@ -85,6 +88,12 @@
 <script src="/static/admin/js/layer/layer.js"></script>
 <script src="/static/admin/js/laypage/laypage.js"></script>
 <script src="/static/admin/js/laytpl/laytpl.js"></script>
+<script src="/static/admin/js/select2.full.js"></script>
+<script src="/static/admin/js/select2.js"></script>
+<script src="/static/admin/js/i18n/es.js"></script>
+<script src="/static/admin/js/i18n/zh-CN.js"></script>
+<script src="__JS__/bootstrap-switch.js"></script>
+<script src="__JS__/toastr.min.js"></script>
 <script>
     $(document).ready(function(){$(".i-checks").iCheck({checkboxClass:"icheckbox_square-green",radioClass:"iradio_square-green",})});
 </script>

@@ -38,4 +38,11 @@ class Base extends Controller
         ]);
 
     }
+
+    public function Prompt($code = 1, $message) {
+        return [
+            'code' => $code,
+            'message' => $message,
+        ];
+    }
 }

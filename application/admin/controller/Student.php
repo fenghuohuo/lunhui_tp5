@@ -24,6 +24,7 @@ class Student extends Base
     {
         $class = isset($_GET['class']) ? $_GET['class'] : '';
         $this->getTimeTable($class);
+        $this->assign('class', $class);
         return $this->fetch('student\index');
     }
 
@@ -79,18 +80,12 @@ class Student extends Base
                 try {
                     $ret = $timetable->save();
                 } catch (\Exception $e) {
-                    return $error = [
-                        'code' => $e->getCode(),
-                        'message' => "保存失败：" . $e->getMessage()
-                    ];
+                    return $this->Prompt(-1, "保存失败：" . $e->getMessage());
                 }
             }
         }
 
-        return $success = [
-            'code' => 1,
-            'message' => "保存成功!"
-        ];
+        return $this->Prompt(1, "保存成功!");
     }
 
     /**
@@ -103,10 +98,7 @@ class Student extends Base
         $time = explode(" ", $time);
 
         if (count($time) != 2) {
-            return $error = [
-                'code' => -1,
-                'message' => "time异常!"
-            ];
+            return $this->Prompt(-1, "time异常!");
         }
 
         $week = $time[0];
@@ -146,12 +138,8 @@ class Student extends Base
                 ],
             ];
         } else {
-            return $error = [
-                'code' => -1,
-                'message' => "改时间无课程，请先添加!"
-            ];
+            return $this->Prompt(-1, "该时间无课程，请先添加!");
         }
-
 
         $this->assign('list', json_encode($list));
         return $this->fetch('edit');
@@ -172,10 +160,7 @@ class Student extends Base
         $time = explode(" ", $time);
 
         if (count($time) != 2) {
-            return $error = [
-                'code' => -1,
-                'message' => "time异常!"
-            ];
+            return $this->Prompt(-1, "time异常!");
         }
 
         $week = $time[0];
@@ -185,28 +170,53 @@ class Student extends Base
         $timeTable = $timeTable
             ->where('week', $week)
             ->where('num', $num)
+            ->where('room', $room)
             ->find();
 
+        if($timeTable->classid != $class) {
+            return $this->Prompt(-1, "该教室已经被占用!");
+        }
+
         $timeTable->cid = $course;
-        $timeTable->classid = $class;
         $timeTable->room = $room;
         $timeTable->tid = $teacher;
+
 
         try {
             $ret = $timeTable->save();
         } catch (\Exception $e) {
-            return $error = [
-                'code' => $e->getCode(),
-                'message' => "保存失败：" . $e->getMessage()
-            ];
+            return $this->Prompt(-1, "保存失败");
         }
 
-        return $success = [
-            'code' => 1,
-            'message' => "保存成功!"
-        ];
+        return $this->Prompt(1, "保存成功");
     }
 
+    public function delete()
+    {
+        $time = $_POST['time'];
+        $classid = $_POST['class'];
+
+        $time = explode(" ", $time);
+        if (count($time) != 2) {
+            return $this->Prompt(-1, "time异常!");
+        }
+
+        $week = $time[0];
+        $num = $time[1];
+
+        $timeTable = new TimeTableModel();
+        $id = $timeTable
+            ->where('week', $week)
+            ->where('num', $num)
+            ->where('classid', $classid)
+            ->delete();
+
+        if ($id) {
+            return $this->Prompt(1, "删除成功");
+        } else {
+            return $this->Prompt(-1, "删除失败");
+        }
+    }
 
     /**
      * @name 获取课程

@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1486526264;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1486624102;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -208,6 +208,8 @@
 <script type="text/javascript">
 
     $(function () {
+        toastr.options.positionClass = 'toast-bottom-center';
+
         $('#getClass').select2({
             multiple: false,
             placeholder: '选择班级',
@@ -234,6 +236,7 @@
 
         $('#getClass').change(function () {
             var Class = $(this).val();
+            var text = $(this).text();
             $.ajax({
                 url: '<?php echo url("student/index"); ?>',
                 type: 'get',
@@ -242,14 +245,14 @@
                     class: Class,
                 },
                 success: function(data) {
-                    $("body").html(data);
+                    $('body').html(data);
                 }
             });
         });
 
         //修改按钮
         $("[name='edit']").click( function (){
-            var time = $(this).parent().prev().find("[name='time']").text();
+            var time = $(this).parent().prev().find("[name='time']").text();//格式：星期 节数
             var url = '<?php echo url("student/editView"); ?>' + "?time=" + time;
 
             layer.open({
@@ -262,6 +265,7 @@
                 content:url,
                 yes : function(index, layero) {
                     var data = $(layero).find("iframe")[0].contentWindow.getData();
+                    console.log(data);
                     function error(code){
                         $(layero).find("iframe")[0].contentWindow.error(code);
                     } 
@@ -280,45 +284,78 @@
                                 'room': data['room'],
                             },
                             success: function(data) {
-                                toastr.options.positionClass = 'toast-bottom-center';
                                 if (data.code < 0) {
                                     error(data);
                                 } else {
-                                    toastr.success(data.message);
                                     layer.close(index);
+                                    toastr.success(data.message);
+                                    setTimeout(function () {
+                                        $.ajax({
+                                            url: '<?php echo url("student/index"); ?>',
+                                            type: 'get',
+                                            dataType: 'json',
+                                            data: {
+                                                class: parseInt('<?php echo $class; ?>'),
+                                            },
+                                            success: function(data) {
+                                                $("body").html(data);
+                                            }
+                                        });
+                                    }, 500);
                                 }
-                                var Class = $(this).val();
-                                $.ajax({
-                                    url: '<?php echo url("student/index"); ?>',
-                                    type: 'get',
-                                    dataType: 'json',
-                                    data: {
-                                        class: Class,
-                                    },
-                                    success: function(data) {
-                                        $("body").html(data);
-                                    }
-                                });
                             },
                             error: function(data) {
                                 return data;
                             }
                         });
                     } else {
-                        toastr.error("请输入数据！");
-                        layer.close(index);
+                        var error_data = new Array();
+                        error_data['code'] = -1 ;
+                        error_data['message'] = "请输入数据！";
+                        error(error_data);
                     }
+
                 },
                 no : function (index, layero) {
                     layer.close(layero);
                 }
             });
+
         });
 
         //删除按钮
-        // $("[name='delete']").click(function (){
-
-        // })
+        $("[name='delete']").click(function (){
+            var time = $(this).parent().prev().find("[name='time']").text();
+            $.ajax({
+                url: '<?php echo url("student/delete"); ?>',
+                type: 'post',
+                dataType: 'json',
+                data: {
+                    'class': parseInt('<?php echo $class; ?>'),
+                    'time': time,
+                },
+                success: function(data) {
+                    toastr.success(data.message);
+                    setTimeout(function () {
+                        $.ajax({
+                            url: '<?php echo url("student/index"); ?>',
+                            type: 'get',
+                            dataType: 'json',
+                            data: {
+                                class: parseInt('<?php echo $class; ?>'),
+                                time: time,
+                            },
+                            success: function(data) {
+                                $("body").html(data);
+                            }
+                        });
+                    }, 500);
+                },
+                error: function(data){
+                    toastr.error(data.code, data.message);
+                }
+            });
+        })
 
     })
 

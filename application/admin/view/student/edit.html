@@ -4,15 +4,14 @@
     <form class="form" role="form" name="editData" >
         <div class="form-group">
             <div class="input-group">
-                <div class="input-group-addon">课程</div>
-                <select id="getCourse" class="select2-search__field form-control" name="course" >
-                </select>
+                <div class="input-group-addon" name="class">
+                </div>
             </div>
         </div>
         <div class="form-group">
             <div class="input-group">
-                <div class="input-group-addon">班级</div>
-                <select id="getClass" class="select2-search__field form-control" name="class">
+                <div class="input-group-addon">课程</div>
+                <select id="getCourse" class="select2-search__field form-control" name="course" >
                 </select>
             </div>
         </div>
@@ -59,7 +58,7 @@
 
         return data;
     };
-
+    console.log(getData());
     var error = function (data){
         toastr.error(data.code, data.message);
     }
@@ -100,30 +99,9 @@
         });
         $("#getCourse").html("<option value=" + list.course.id + ">" + list.course.text + "</option>");
 
-        $("#getClass").select2({
-            placeholder: "选择班级",
-            multiple: false,
-            tags: true,
-            ajax: {
-                url: '{:url("student/getClass")}',
-                dataType: 'json',
-                delay: 50,
-                data: function (item) {
-                    return item
-                },
-                processResults: function (data, page) {
-                    return {
-                        results: data
-                    }
-                },
-                cache: true
-            },
-            minimumInputLength: 0,
-            templateResult: function(item){ return '<span style="font-size:8px">' + item .text + '</span>'},
-            templateSelection: function(item) { return item.text },
-            escapeMarkup: function (markup) { return markup;},
-        });
-        $("#getClass").html("<option value=" + list.class.id + ">" + list.class.text + "</option>");
+        //显示修改班级
+        $("[name='class']").val(list.class.id);
+        $("[name='class']").text(list.class.text);
 
         $("#getTeacher").select2({
             placeholder: "选择教师",
