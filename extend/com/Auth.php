@@ -148,11 +148,10 @@ class Auth{
             return $groups[$uid];
         $user_groups = \think\Db::table('think_auth_group_access')
             ->alias('a')
-            ->join("auth_group", "g.id=a.group_id")
+            ->join("think_auth_group g", "g.id=a.group_id")
             ->where("a.uid='$uid'")
             ->where("g.status='1'")
             ->field('uid,group_id,title,rules')->select();
-        var_dump($user_groups);exit;
         $groups[$uid] = $user_groups ? $user_groups : array();
         return $groups[$uid];
     }

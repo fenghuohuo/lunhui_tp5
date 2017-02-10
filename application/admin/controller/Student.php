@@ -22,9 +22,17 @@ class Student extends Base
      */
     public function index()
     {
-        $class = isset($_GET['class']) ? $_GET['class'] : '';
-        $this->getTimeTable($class);
+        $classid = isset($_GET['class']) ? $_GET['class'] : '';
+        $class = $classid;
+        if ($classid) {
+            $class = ClassModel::get($classid);
+            $class = $class->major . $class->class;
+
+        }
+
+        $this->getTimeTable($classid);
         $this->assign('class', $class);
+
         return $this->fetch('student\index');
     }
 
@@ -216,6 +224,30 @@ class Student extends Base
         } else {
             return $this->Prompt(-1, "删除失败");
         }
+    }
+
+    /**
+     * @name 学生查看课表
+     */
+    public function timetableStudent()
+    {
+        $classid = isset($_GET['class']) ? $_GET['class'] : '';
+        $getclass = isset($_GET['getclass']) ? $_GET['getclass'] : 0;
+
+        if ($getclass) {
+            return $this->getCourse();
+        }
+
+        if ($classid) {
+            $this->getTimeTable($classid);
+            $class = ClassModel::get($classid);
+            $this->assign('class', $class->major . $class->class);
+            return $this->fetch('student\timetablestudent');
+        } else {
+            $this->assign('list', '');
+            return $this->fetch('student\timetablestudent');
+        }
+
     }
 
     /**

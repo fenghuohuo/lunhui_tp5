@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1486624102;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1486696549;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -34,6 +34,15 @@
             <select id="getClass" class="select2-search__field form-control" name="class">
             </select>
         </div>
+    </div>
+    <div class="text-left">
+        <h1 class="text-center">
+            课程表
+        </h1>
+        <h2>
+            <?php if(!empty($class)): ?>
+                <?php echo $class; endif; ?>
+        </h2>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight" name="timetable">
     <div class="ibox float-e-margins">
