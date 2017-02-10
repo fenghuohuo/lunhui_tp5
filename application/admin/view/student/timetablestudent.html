@@ -1,0 +1,225 @@
+{include file="public/header" /}
+
+<body class="gray-bg">
+    <div class="form-group" style="width: 200px; background-color: gray;">
+        <div class="input-group">
+            <div class="input-group-addon" >班级</div>
+            <select id="getClass" class="select2-search__field form-control" name="class">
+            </select>
+        </div>
+    </div>
+    <div class="text-left">
+        <h1 class="text-center">
+            课程表
+        </h1>
+        <h2>
+            {if !empty($class)}
+                {$class}
+            {/if}
+        </h2>
+    </div>
+    <div class="wrapper wrapper-content animated fadeInRight" name="timetable">
+    <div class="ibox float-e-margins">
+        <div class="example-wrap">
+            <div class="example">
+                <table class="table table-bordered table-hover">
+                    <thead>
+                    <tr class="long-tr">
+                        <th  ></th>
+                        <th >星期一</th>
+                        <th >星期二</th>
+                        <th >星期三</th>
+                        <th >星期四</th>
+                        <th >星期五</th>
+                        <th >星期六</th>
+                        <th >星期日</th>
+                    </tr>
+                    </thead>
+                    <tbody id="timetables">
+                        <tr>
+                            <td rowspan="2" width="20px">上午</td>
+                            <td >第12节</td>
+                            {if !empty($list)}
+                                {foreach name="list[1]" item="vo"}
+                                    {if !empty($vo)}
+                                        <td>
+                                            {$vo.room}<br/>
+                                            {$vo.cname}
+                                        </td>
+                                    {/if}
+                                    {if empty($vo)}
+                                        <td ></td>
+                                    {/if}
+                                {/foreach}
+                            {/if}
+                            {if empty($list)}
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                            {/if}
+                        </tr>
+                        <tr>
+                            <td width="20px" class="">第34节</td>
+                            {if !empty($list)}
+                                {foreach name="list[2]" item="vo"}
+                                    {if !empty($vo)}
+                                        <td>
+                                            {$vo.room}<br/>
+                                            {$vo.cname}
+                                        </td>
+                                    {/if}
+                                    {if empty($vo)}
+                                        <td ></td>
+                                    {/if}
+                                {/foreach}
+                            {/if}
+                            {if empty($list)}
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                            {/if}
+                        </tr>
+                        <tr>
+                            <td rowspan="2" width="20px">下午</td>
+                            <td >第56节</td>
+                            {if !empty($list)}
+                                {foreach name="list[3]" item="vo"}
+                                    {if !empty($vo)}
+                                        <td>
+                                            {$vo.room}<br/>
+                                            {$vo.cname}
+                                        </td>
+                                    {/if}
+                                    {if empty($vo)}
+                                        <td ></td>
+                                    {/if}
+                                {/foreach}
+                            {/if}
+                            {if empty($list)}
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                            {/if}
+                        </tr>
+                        <tr>
+                            <td width="20px" class="">第78节</td>
+                            {if !empty($list)}
+                                {foreach name="list[4]" item="vo"}
+                                    {if !empty($vo)}
+                                        <td>
+                                            {$vo.room}<br/>
+                                            {$vo.cname}
+                                        </td>
+                                    {/if}
+                                    {if empty($vo)}
+                                        <td ></td>
+                                    {/if}
+                                {/foreach}
+                            {/if}
+                            {if empty($list)}
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                            {/if}
+                        </tr>
+                        <tr>
+                            <td >晚上</td>
+                            {if !empty($list)}
+                                {foreach name="list[5]" item="vo"}
+                                    {if !empty($vo)}
+                                        <td>
+                                            {$vo.room}<br/>
+                                            {$vo.cname}
+                                        </td>
+                                    {/if}
+                                    {if empty($vo)}
+                                        <td ></td>
+                                    {/if}
+                                {/foreach}
+                            {/if}
+                            {if empty($list)}
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                                <td ></td>
+                            {/if}
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+{include file="public/footer" /}
+
+<script type="text/javascript">
+
+    $(function () {
+        toastr.options.positionClass = 'toast-bottom-center';
+
+        $('#getClass').select2({
+            multiple: false,
+            placeholder: '选择班级',
+            tags: true,
+            ajax: {
+                url: '{:url("student/getClass")}',
+                dataType: 'json',
+                delay: 50,
+                data: function (item) {
+                    return item
+                },
+                processResults: function (data, page) {
+                    return {
+                        results: data
+                    }
+                },
+                cache: true
+            },
+            minimumInputLength: 0,
+            templateResult: function(item){ return '<span style="font-size:8px">' + item .text + '</span>'},
+            templateSelection: function(item) { return item.text },
+            escapeMarkup: function (markup) { return markup;},
+        });
+
+        $('#getClass').change(function () {
+            var Class = $(this).val();
+            var text = $(this).text();
+            $.ajax({
+                url: '{:url("student/index")}',
+                type: 'get',
+                dataType: 'json',
+                data: {
+                    class: Class,
+                },
+                success: function(data) {
+                    $('body').html(data);
+                }
+            });
+        });
+
+        
+    })
+
+</script>
+
