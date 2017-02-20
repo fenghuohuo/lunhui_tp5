@@ -19,4 +19,9 @@ class Index extends Controller
     {
         return $this->fetch('test/test1');
     }
+
+    public function test2()
+    {
+        return $this->fetch('test/test3');
+    }
 }
