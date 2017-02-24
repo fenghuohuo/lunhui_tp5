@@ -22,6 +22,11 @@ class Index extends Controller
 
     public function test2()
     {
-        return $this->fetch('test/test3');
+
+        $a = (string)'1=1';
+        $b = (string)"1=1";
+
+        var_dump($a == $b);exit;
+//        return $this->fetch('test/test3');
     }
 }

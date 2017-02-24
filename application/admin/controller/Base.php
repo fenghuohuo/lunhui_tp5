@@ -26,9 +26,9 @@ class Base extends Controller
         $controller = strtolower(request()->controller());
         $action     = strtolower(request()->action());
         $url        = $module."/".$controller."/".$action;
-
+//var_dump(session('uid'));exit;
         //跳过检测以及主页权限
-        if (session('uid')!=1) {
+        if (session('uid') != 1) {
             if (!in_array($url, ['admin/index/index','admin/index/indexpage'])) {
                 if (!$auth->check($url,session('uid')) && !in_array($url, $this->getPubRule())) {
                     $this->error('抱歉，您没有操作权限');

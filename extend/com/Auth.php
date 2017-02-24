@@ -96,9 +96,10 @@ class Auth{
     public function check($name, $uid, $type=1, $mode='url', $relation='or') {
         if (!$this->_config['auth_on'])
             return true;
-		
+
         $authList = $this->getAuthList($uid,$type); //获取用户需要验证的所有有效规则列表
-		
+//        var_dump($authList,$uid,$type);exit;
+
         if (is_string($name)) {
             $name = strtolower($name);
             if (strpos($name, ',') !== false) {
@@ -124,7 +125,7 @@ class Auth{
                 $list[] = $auth ;
             }
         }
-		//dump($list);exit;
+//		var_dump($list);exit;
         if ($relation == 'or' and !empty($list)) {
             return true;
         }
@@ -174,6 +175,7 @@ class Auth{
 
         //读取用户所属用户组
         $groups = $this->getGroups($uid);
+//        var_dump($groups);exit;
         $ids = array();//保存用户所属用户组设置的所有权限规则id
         foreach ($groups as $g) {
             $ids = array_merge($ids, explode(',', trim($g['rules'], ',')));

@@ -3,6 +3,7 @@
 namespace app\admin\controller;
 use app\admin\Model\UserModel;
 use app\admin\model\UserType;
+use app\admin\model\AuthGroupAccessModel;
 use think\Db;
 
 class User extends Base
@@ -47,10 +48,17 @@ class User extends Base
     {
         if(request()->isAjax()){
 
+            $tmp = [];
             $param = input('post.');
             $param['password'] = md5(md5($param['password']) . config('auth_key'));
             $user = new UserModel();
             $flag = $user->insertUser($param);
+
+            $tmp['id'] = $user['id'];
+            $tmp['groupid'] = $param['groupid'];
+            $authGroupAccess = new AuthGroupAccessModel();
+            $flagAuth = $authGroupAccess->addUser($tmp);
+
             writelog(session('id'),session('username'),'用户【'.$param['username'].'】添加成功',1);
             return json(['code' => $flag['code'], 'data' => $flag['data'], 'msg' => $flag['msg']]);
         }

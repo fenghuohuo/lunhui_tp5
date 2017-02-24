@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:61:"D:\WWW\lunhui_tp5\public/../application/admin\view\index.html";i:1484642674;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:1:{s:61:"D:\WWW\lunhui_tp5\public/../application/admin\view\index.html";i:1486706555;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>

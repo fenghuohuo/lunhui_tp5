@@ -282,19 +282,20 @@
                                 } else {
                                     layer.close(index);
                                     toastr.success(data.message);
-                                    setTimeout(function () {
-                                        $.ajax({
-                                            url: '{:url("student/index")}',
-                                            type: 'get',
-                                            dataType: 'json',
-                                            data: {
-                                                class: parseInt('{$class}'),
-                                            },
-                                            success: function(data) {
-                                                $("body").html(data);
-                                            }
-                                        });
-                                    }, 500);
+                                    console.log('{$class}');
+                                    // setTimeout(function () {
+                                    //     $.ajax({
+                                    //         url: '{:url("student/index")}',
+                                    //         type: 'get',
+                                    //         dataType: 'json',
+                                    //         data: {
+                                    //             class: parseInt('{$class}'),
+                                    //         },
+                                    //         success: function(data) {
+                                    //             $("body").html(data);
+                                    //         }
+                                    //     });
+                                    // }, 500);
                                 }
                             },
                             error: function(data) {

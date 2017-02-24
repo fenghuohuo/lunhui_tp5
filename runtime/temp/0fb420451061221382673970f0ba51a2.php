@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1486696549;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1484803729;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1484803761;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1487668220;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1486699820;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1486699820;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -298,19 +298,20 @@
                                 } else {
                                     layer.close(index);
                                     toastr.success(data.message);
-                                    setTimeout(function () {
-                                        $.ajax({
-                                            url: '<?php echo url("student/index"); ?>',
-                                            type: 'get',
-                                            dataType: 'json',
-                                            data: {
-                                                class: parseInt('<?php echo $class; ?>'),
-                                            },
-                                            success: function(data) {
-                                                $("body").html(data);
-                                            }
-                                        });
-                                    }, 500);
+                                    console.log('<?php echo $class; ?>');
+                                    // setTimeout(function () {
+                                    //     $.ajax({
+                                    //         url: '<?php echo url("student/index"); ?>',
+                                    //         type: 'get',
+                                    //         dataType: 'json',
+                                    //         data: {
+                                    //             class: parseInt('<?php echo $class; ?>'),
+                                    //         },
+                                    //         success: function(data) {
+                                    //             $("body").html(data);
+                                    //         }
+                                    //     });
+                                    // }, 500);
                                 }
                             },
                             error: function(data) {
