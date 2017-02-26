@@ -8,6 +8,16 @@
             </select>
         </div>
     </div>
+    <div class="text-left">
+        <h1 class="text-center">
+            课程表
+        </h1>
+        <h2>
+            {if !empty($class)}
+                {$class}
+            {/if}
+        </h2>
+    </div>
     <div class="wrapper wrapper-content animated fadeInRight" name="timetable">
     <div class="ibox float-e-margins">
         <div class="example-wrap">
@@ -272,19 +282,20 @@
                                 } else {
                                     layer.close(index);
                                     toastr.success(data.message);
-                                    setTimeout(function () {
-                                        $.ajax({
-                                            url: '{:url("student/index")}',
-                                            type: 'get',
-                                            dataType: 'json',
-                                            data: {
-                                                class: parseInt('{$class}'),
-                                            },
-                                            success: function(data) {
-                                                $("body").html(data);
-                                            }
-                                        });
-                                    }, 500);
+                                    console.log('{$class}');
+                                    // setTimeout(function () {
+                                    //     $.ajax({
+                                    //         url: '{:url("student/index")}',
+                                    //         type: 'get',
+                                    //         dataType: 'json',
+                                    //         data: {
+                                    //             class: parseInt('{$class}'),
+                                    //         },
+                                    //         success: function(data) {
+                                    //             $("body").html(data);
+                                    //         }
+                                    //     });
+                                    // }, 500);
                                 }
                             },
                             error: function(data) {
