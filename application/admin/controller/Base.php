@@ -35,7 +35,6 @@ class Base extends Controller
                         $this->error('抱歉，您没有操作权限');
                     }
                 }
-
             }
         }
         

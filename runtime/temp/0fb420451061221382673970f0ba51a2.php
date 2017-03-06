@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1488786754;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1486699820;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1486699820;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1488787521;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1488787521;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1488787521;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
