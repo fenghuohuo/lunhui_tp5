@@ -1,4 +1,4 @@
-<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1487668220;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1486699820;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1486699820;}*/ ?>
+<?php if (!defined('THINK_PATH')) exit(); /*a:3:{s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\student\index.html";i:1488786754;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\header.html";i:1486699820;s:69:"D:\WWW\lunhui_tp5\public/../application/admin\view\public\footer.html";i:1486699820;}*/ ?>
 <!DOCTYPE html>
 <html>
 <head>
@@ -39,10 +39,10 @@
         <h1 class="text-center">
             课程表
         </h1>
-        <h2>
+        <h3>
             <?php if(!empty($class)): ?>
                 <?php echo $class; endif; ?>
-        </h2>
+        </h3>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight" name="timetable">
     <div class="ibox float-e-margins">
@@ -299,19 +299,19 @@
                                     layer.close(index);
                                     toastr.success(data.message);
                                     console.log('<?php echo $class; ?>');
-                                    // setTimeout(function () {
-                                    //     $.ajax({
-                                    //         url: '<?php echo url("student/index"); ?>',
-                                    //         type: 'get',
-                                    //         dataType: 'json',
-                                    //         data: {
-                                    //             class: parseInt('<?php echo $class; ?>'),
-                                    //         },
-                                    //         success: function(data) {
-                                    //             $("body").html(data);
-                                    //         }
-                                    //     });
-                                    // }, 500);
+                                    setTimeout(function () {
+                                        $.ajax({
+                                            url: '<?php echo url("student/index"); ?>',
+                                            type: 'get',
+                                            dataType: 'json',
+                                            data: {
+                                                class: parseInt('<?php echo $class; ?>'),
+                                            },
+                                            success: function(data) {
+                                                $("body").html(data);
+                                            }
+                                        });
+                                    }, 500);
                                 }
                             },
                             error: function(data) {
@@ -341,18 +341,23 @@
                 type: 'post',
                 dataType: 'json',
                 data: {
-                    'class': parseInt('<?php echo $class; ?>'),
+                    'class': parseInt('<?php echo $classid; ?>'),
                     'time': time,
                 },
                 success: function(data) {
-                    toastr.success(data.message);
+                    if (data.code > 0)
+                        toastr.success(data.message);
+                    else 
+                        toastr.error(data.message);
+                    var class_id = parseInt('<?php echo $classid; ?>');
+                    console.log(class_id);
                     setTimeout(function () {
                         $.ajax({
                             url: '<?php echo url("student/index"); ?>',
                             type: 'get',
                             dataType: 'json',
                             data: {
-                                class: parseInt('<?php echo $class; ?>'),
+                                class: class_id,
                                 time: time,
                             },
                             success: function(data) {

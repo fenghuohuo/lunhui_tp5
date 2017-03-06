@@ -10,7 +10,7 @@ use think\Model;
 
 class AuthGroupAccessModel extends Model
 {
-    protected $name = 'think_auth_group_access';
+    protected $name = 'auth_group_access';
 
     /**
      * @name 添加用户关联

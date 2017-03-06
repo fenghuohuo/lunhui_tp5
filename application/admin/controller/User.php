@@ -54,8 +54,8 @@ class User extends Base
             $user = new UserModel();
             $flag = $user->insertUser($param);
 
-            $tmp['id'] = $user['id'];
-            $tmp['groupid'] = $param['groupid'];
+            $tmp['uid'] = $user['id'];
+            $tmp['group_id'] = $param['groupid'];
             $authGroupAccess = new AuthGroupAccessModel();
             $flagAuth = $authGroupAccess->addUser($tmp);
 
