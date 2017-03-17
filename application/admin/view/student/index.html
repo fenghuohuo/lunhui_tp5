@@ -12,11 +12,11 @@
         <h1 class="text-center">
             课程表
         </h1>
-        <h2>
+        <h3>
             {if !empty($class)}
                 {$class}
             {/if}
-        </h2>
+        </h3>
     </div>
     <div class="wrapper wrapper-content animated fadeInRight" name="timetable">
     <div class="ibox float-e-margins">
@@ -283,19 +283,19 @@
                                     layer.close(index);
                                     toastr.success(data.message);
                                     console.log('{$class}');
-                                    // setTimeout(function () {
-                                    //     $.ajax({
-                                    //         url: '{:url("student/index")}',
-                                    //         type: 'get',
-                                    //         dataType: 'json',
-                                    //         data: {
-                                    //             class: parseInt('{$class}'),
-                                    //         },
-                                    //         success: function(data) {
-                                    //             $("body").html(data);
-                                    //         }
-                                    //     });
-                                    // }, 500);
+                                    setTimeout(function () {
+                                        $.ajax({
+                                            url: '{:url("student/index")}',
+                                            type: 'get',
+                                            dataType: 'json',
+                                            data: {
+                                                class: parseInt('{$class}'),
+                                            },
+                                            success: function(data) {
+                                                $("body").html(data);
+                                            }
+                                        });
+                                    }, 500);
                                 }
                             },
                             error: function(data) {
@@ -325,18 +325,23 @@
                 type: 'post',
                 dataType: 'json',
                 data: {
-                    'class': parseInt('{$class}'),
+                    'class': parseInt('{$classid}'),
                     'time': time,
                 },
                 success: function(data) {
-                    toastr.success(data.message);
+                    if (data.code > 0)
+                        toastr.success(data.message);
+                    else 
+                        toastr.error(data.message);
+                    var class_id = parseInt('{$classid}');
+                    console.log(class_id);
                     setTimeout(function () {
                         $.ajax({
                             url: '{:url("student/index")}',
                             type: 'get',
                             dataType: 'json',
                             data: {
-                                class: parseInt('{$class}'),
+                                class: class_id,
                                 time: time,
                             },
                             success: function(data) {

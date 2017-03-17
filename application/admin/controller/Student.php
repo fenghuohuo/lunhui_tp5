@@ -27,11 +27,11 @@ class Student extends Base
         if ($classid) {
             $class = ClassModel::get($classid);
             $class = $class->major . $class->class;
-
         }
 
         $this->getTimeTable($classid);
         $this->assign('class', $class);
+        $this->assign('classid', $classid);
 
         return $this->fetch('student\index');
     }
@@ -178,7 +178,6 @@ class Student extends Base
         $timeTable = $timeTable
             ->where('week', $week)
             ->where('num', $num)
-            ->where('room', $room)
             ->find();
 
         if($timeTable->classid != $class) {
@@ -199,6 +198,10 @@ class Student extends Base
         return $this->Prompt(1, "保存成功");
     }
 
+    /**
+     * @name 课程删除
+     * @throws \think\Exception
+     */
     public function delete()
     {
         $time = $_POST['time'];

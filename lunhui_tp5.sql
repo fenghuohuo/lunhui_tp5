@@ -2,15 +2,15 @@
 Navicat MySQL Data Transfer
 
 Source Server         : localhost
-Source Server Version : 50621
+Source Server Version : 50540
 Source Host           : localhost:3306
 Source Database       : lunhui_tp5
 
 Target Server Type    : MYSQL
-Target Server Version : 50621
+Target Server Version : 50540
 File Encoding         : 65001
 
-Date: 2016-10-31 17:21:49
+Date: 2017-03-06 17:02:25
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -30,15 +30,16 @@ CREATE TABLE `think_admin` (
   `status` int(1) DEFAULT '0' COMMENT '状态',
   `groupid` int(11) DEFAULT '1' COMMENT '用户角色id',
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB AUTO_INCREMENT=16 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
+) ENGINE=InnoDB AUTO_INCREMENT=31 DEFAULT CHARSET=utf8 COLLATE=utf8_bin;
 
 -- ----------------------------
 -- Records of think_admin
 -- ----------------------------
-INSERT INTO `think_admin` VALUES ('1', 'admin', 'ebbd202c239d6fc65061ae22a13c1b69', '164', '0.0.0.0', '1477899249', 'admin', '1', '1');
-INSERT INTO `think_admin` VALUES ('9', 'tjl', 'e10adc3949ba59abbe56e057f20f883e', '18', '0.0.0.0', '1477140627', '田建龙', '1', '2');
-INSERT INTO `think_admin` VALUES ('13', 'test', 'a69e14096f597b30a116cc7ed206100b', '0', '', '0', 'bfg', '1', '2');
+INSERT INTO `think_admin` VALUES ('1', 'admin', 'ebbd202c239d6fc65061ae22a13c1b69', '179', '127.0.0.1', '1488785384', 'admin', '1', '1');
+INSERT INTO `think_admin` VALUES ('9', 'tjl', 'e10adc3949ba59abbe56e057f20f883e', '18', '0.0.0.0', '1477140627', 'admin', '1', '2');
 INSERT INTO `think_admin` VALUES ('15', 'test123', 'ebbd202c239d6fc65061ae22a13c1b69', '0', '', '0', 'dddd', '1', '3');
+INSERT INTO `think_admin` VALUES ('16', '主任', '218dbb225911693af03a713581a7227f', '7', '127.0.0.1', '1488788687', '主任', '1', '9');
+INSERT INTO `think_admin` VALUES ('30', '学生1', '218dbb225911693af03a713581a7227f', '1', '127.0.0.1', '1488784013', '111', '1', '11');
 
 -- ----------------------------
 -- Table structure for think_article
@@ -99,7 +100,6 @@ INSERT INTO `think_article_cate` VALUES ('5', 'PHP', '5', '1477140627', '1477140
 INSERT INTO `think_article_cate` VALUES ('6', 'Java', '6', '1477140627', '1477140627', '1');
 INSERT INTO `think_article_cate` VALUES ('9', '11', '11', '1477140627', '1477316133', '1');
 INSERT INTO `think_article_cate` VALUES ('10', '22', '22', '1477140627', '1477316141', '1');
-INSERT INTO `think_article_cate` VALUES ('17', '888888', '88888', '1477314660', '1477316625', '1');
 
 -- ----------------------------
 -- Table structure for think_auth_group
@@ -113,7 +113,7 @@ CREATE TABLE `think_auth_group` (
   `create_time` int(11) DEFAULT NULL,
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=8 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=12 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of think_auth_group
@@ -121,7 +121,8 @@ CREATE TABLE `think_auth_group` (
 INSERT INTO `think_auth_group` VALUES ('1', '超级管理员', '1', '', '1446535750', '1446535750');
 INSERT INTO `think_auth_group` VALUES ('2', '内容管理员', '1', '1,2,9,10,11,12,3,4,5,6,7,8,13,14,22,24,25,26', '1446535750', '1477322342');
 INSERT INTO `think_auth_group` VALUES ('3', '系统维护员', '1', '1,2,9,10,11,12,3,4,5,6,7,8,13,14,22,24,25,26', '1446535750', '1477322335');
-INSERT INTO `think_auth_group` VALUES ('4', '工程部', '1', '1,2,9,10,11,12,3,4,5,6,7,8,13,14,22,24,25,26', '1446535750', '1477322329');
+INSERT INTO `think_auth_group` VALUES ('9', '主任', '1', '24,33,31,38,39,40,32,41,34,35,36,37', '1486624259', '1488789331');
+INSERT INTO `think_auth_group` VALUES ('11', '学生', '1', '24,33', '1488783008', '1488783016');
 
 -- ----------------------------
 -- Table structure for think_auth_group_access
@@ -141,6 +142,8 @@ CREATE TABLE `think_auth_group_access` (
 INSERT INTO `think_auth_group_access` VALUES ('1', '1');
 INSERT INTO `think_auth_group_access` VALUES ('9', '2');
 INSERT INTO `think_auth_group_access` VALUES ('14', '3');
+INSERT INTO `think_auth_group_access` VALUES ('16', '9');
+INSERT INTO `think_auth_group_access` VALUES ('30', '11');
 
 -- ----------------------------
 -- Table structure for think_auth_rule
@@ -159,7 +162,7 @@ CREATE TABLE `think_auth_rule` (
   `create_time` int(11) NOT NULL DEFAULT '0' COMMENT '添加时间',
   `update_time` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM AUTO_INCREMENT=30 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=42 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of think_auth_rule
@@ -178,13 +181,55 @@ INSERT INTO `think_auth_rule` VALUES ('11', 'admin/user/userdel', '删除用户'
 INSERT INTO `think_auth_rule` VALUES ('12', 'admin/user/user_state', '用户状态更改', '1', '1', '', '', '2', '0', '0', '0');
 INSERT INTO `think_auth_rule` VALUES ('13', '#', '日志管理', '1', '1', 'fa fa-tasks', '', '0', '0', '0', '0');
 INSERT INTO `think_auth_rule` VALUES ('14', 'admin/log/operate_log', '操作日志', '1', '1', '', '', '13', '0', '0', '0');
-INSERT INTO `think_auth_rule` VALUES ('22', '7', '天堂海滩', '1', '0', '', '', '13', '50', '0', '1477316778');
-INSERT INTO `think_auth_rule` VALUES ('24', '#', '文章管理', '1', '1', 'fa fa-paste', '', '0', '50', '1477312169', '1477312169');
-INSERT INTO `think_auth_rule` VALUES ('25', 'admin/article/index_cate', '文章分类', '1', '1', '', '', '24', '50', '1477312260', '1477312260');
-INSERT INTO `think_auth_rule` VALUES ('26', 'admin/article/index', '文章列表', '1', '1', '', '', '24', '50', '1477312333', '1477312333');
+INSERT INTO `think_auth_rule` VALUES ('24', '#', '课程表管理', '1', '1', 'fa fa-paste', '', '0', '50', '1477312169', '1477312169');
+INSERT INTO `think_auth_rule` VALUES ('33', 'admin/student/timetablestudent', '课程表查看【学生】', '1', '1', '', '', '24', '50', '1486625380', '1486625380');
 INSERT INTO `think_auth_rule` VALUES ('27', 'admin/data/import', '数据库还原', '1', '1', '', '', '5', '50', '1477639870', '1477639870');
 INSERT INTO `think_auth_rule` VALUES ('28', 'admin/data/revert', '还原', '1', '1', '', '', '27', '50', '1477639972', '1477639972');
 INSERT INTO `think_auth_rule` VALUES ('29', 'admin/data/del', '删除', '1', '1', '', '', '27', '50', '1477640011', '1477640011');
+INSERT INTO `think_auth_rule` VALUES ('31', 'admin/student/index', '课程表查看【管理员】', '1', '1', '', '', '24', '50', '1478494458', '1486625218');
+INSERT INTO `think_auth_rule` VALUES ('32', 'admin/student/insertView', '添加课程菜单', '1', '1', '', '', '24', '50', '1478509817', '1488784702');
+INSERT INTO `think_auth_rule` VALUES ('38', 'admin/student/editView', '修改课程', '1', '1', '', '', '31', '50', '1488789207', '1488789207');
+INSERT INTO `think_auth_rule` VALUES ('39', 'admin/student/delete', '删除课程', '1', '1', '', '', '31', '50', '1488789238', '1488789238');
+INSERT INTO `think_auth_rule` VALUES ('40', 'admin/student/edit', '修改课程方法', '1', '1', '', '', '31', '50', '1488789268', '1488789268');
+INSERT INTO `think_auth_rule` VALUES ('41', 'admin/student/insert', '添加课程方法', '1', '1', '', '', '32', '50', '1488789293', '1488789293');
+
+-- ----------------------------
+-- Table structure for think_class
+-- ----------------------------
+DROP TABLE IF EXISTS `think_class`;
+CREATE TABLE `think_class` (
+  `id` int(11) NOT NULL AUTO_INCREMENT,
+  `dept` varchar(30) NOT NULL COMMENT '系别',
+  `major` varchar(30) NOT NULL COMMENT '专业',
+  `grade` int(4) NOT NULL COMMENT '年级',
+  `class` varchar(10) NOT NULL COMMENT '班级',
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=3 DEFAULT CHARSET=utf8mb4;
+
+-- ----------------------------
+-- Records of think_class
+-- ----------------------------
+INSERT INTO `think_class` VALUES ('1', '数理系', '网络工程', '2013', 'N131');
+INSERT INTO `think_class` VALUES ('2', '数理系', '计算机科学', '2013', 'N132');
+
+-- ----------------------------
+-- Table structure for think_course
+-- ----------------------------
+DROP TABLE IF EXISTS `think_course`;
+CREATE TABLE `think_course` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `cid` int(11) NOT NULL DEFAULT '0',
+  `cname` varchar(30) NOT NULL DEFAULT '无',
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=gbk COMMENT='课程-课程号';
+
+-- ----------------------------
+-- Records of think_course
+-- ----------------------------
+INSERT INTO `think_course` VALUES ('1', '1', '数据库');
+INSERT INTO `think_course` VALUES ('2', '2', '数据结构');
+INSERT INTO `think_course` VALUES ('3', '3', 'web开发');
+INSERT INTO `think_course` VALUES ('4', '4', '高等数学');
 
 -- ----------------------------
 -- Table structure for think_log
@@ -199,7 +244,7 @@ CREATE TABLE `think_log` (
   `status` tinyint(1) DEFAULT NULL COMMENT '1 成功 2 失败',
   `add_time` int(11) DEFAULT NULL COMMENT '添加时间',
   PRIMARY KEY (`log_id`)
-) ENGINE=MyISAM AUTO_INCREMENT=278 DEFAULT CHARSET=utf8;
+) ENGINE=MyISAM AUTO_INCREMENT=349 DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of think_log
@@ -226,7 +271,77 @@ INSERT INTO `think_log` VALUES ('164', '1', 'tjl', '用户【tjl】登录成功'
 INSERT INTO `think_log` VALUES ('165', '1', 'admin', '用户【admin】登录成功', '0.0.0.0', '1', '1477069125');
 INSERT INTO `think_log` VALUES ('166', '1', 'admin', '用户【admin】登录成功', '0.0.0.0', '1', '1477069183');
 INSERT INTO `think_log` VALUES ('167', '1', 'admin', '用户【admin】登录失败：密码错误', '0.0.0.0', '2', '1477069400');
-
+INSERT INTO `think_log` VALUES ('278', '1', 'admin', '用户【admin】登录成功', '127.0.0.1', '1', '1477971632');
+INSERT INTO `think_log` VALUES ('279', '1', 'admin', '用户【admin】登录失败：密码错误', '127.0.0.1', '2', '1478484184');
+INSERT INTO `think_log` VALUES ('280', '1', 'admin', '用户【admin】登录成功', '127.0.0.1', '1', '1478484199');
+INSERT INTO `think_log` VALUES ('281', '1', 'admin', '用户【admin】删除菜单成功', '127.0.0.1', '1', '1478485927');
+INSERT INTO `think_log` VALUES ('282', '1', 'admin', '用户【admin】删除管理员成功(ID=13)', '127.0.0.1', '1', '1478490391');
+INSERT INTO `think_log` VALUES ('283', '1', 'admin', '用户【admin】添加菜单成功', '127.0.0.1', '1', '1478491280');
+INSERT INTO `think_log` VALUES ('284', '1', 'admin', '用户【admin】编辑菜单成功', '127.0.0.1', '1', '1478491326');
+INSERT INTO `think_log` VALUES ('285', '1', 'admin', '用户【admin】编辑菜单成功', '127.0.0.1', '1', '1478491481');
+INSERT INTO `think_log` VALUES ('286', '1', 'admin', '用户【admin】删除菜单成功', '127.0.0.1', '1', '1478494421');
+INSERT INTO `think_log` VALUES ('287', '1', 'admin', '用户【admin】添加菜单成功', '127.0.0.1', '1', '1478494458');
+INSERT INTO `think_log` VALUES ('288', '1', 'admin', '用户【admin】添加菜单成功', '127.0.0.1', '1', '1478509817');
+INSERT INTO `think_log` VALUES ('289', '1', 'admin', '用户【admin】删除菜单成功', '127.0.0.1', '1', '1478510091');
+INSERT INTO `think_log` VALUES ('290', '1', 'admin', '用户【admin】登录成功', '127.0.0.1', '1', '1483682656');
+INSERT INTO `think_log` VALUES ('291', '1', 'admin', '用户【admin】登录成功', '127.0.0.1', '1', '1484022299');
+INSERT INTO `think_log` VALUES ('292', '1', 'admin', '用户【admin】登录成功', '127.0.0.1', '1', '1484545556');
+INSERT INTO `think_log` VALUES ('293', '1', 'admin', '用户【admin】登录成功', '127.0.0.1', '1', '1484546158');
+INSERT INTO `think_log` VALUES ('294', '1', 'admin', '用户【admin】登录成功', '127.0.0.1', '1', '1486364972');
+INSERT INTO `think_log` VALUES ('295', '1', 'admin', '用户【admin】登录成功', '127.0.0.1', '1', '1486365232');
+INSERT INTO `think_log` VALUES ('296', '1', 'admin', '用户【admin】登录成功', '127.0.0.1', '1', '1486456611');
+INSERT INTO `think_log` VALUES ('297', '1', 'admin', '用户【admin】删除菜单成功', '127.0.0.1', '1', '1486625144');
+INSERT INTO `think_log` VALUES ('298', '1', 'admin', '用户【admin】编辑菜单成功', '127.0.0.1', '1', '1486625218');
+INSERT INTO `think_log` VALUES ('299', '1', 'admin', '用户【admin】添加菜单成功', '127.0.0.1', '1', '1486625380');
+INSERT INTO `think_log` VALUES ('300', null, 'admin', '用户【主任】添加成功', '127.0.0.1', '1', '1486633360');
+INSERT INTO `think_log` VALUES ('301', '16', '主任', '用户【主任】登录成功', '127.0.0.1', '1', '1486633416');
+INSERT INTO `think_log` VALUES ('302', '16', '主任', '用户【主任】登录成功', '127.0.0.1', '1', '1486633574');
+INSERT INTO `think_log` VALUES ('303', '1', 'admin', '用户【admin】登录成功', '127.0.0.1', '1', '1486633608');
+INSERT INTO `think_log` VALUES ('304', '16', '主任', '用户【主任】登录成功', '127.0.0.1', '1', '1486633639');
+INSERT INTO `think_log` VALUES ('305', '1', 'admin', '用户【admin】登录成功', '127.0.0.1', '1', '1486692756');
+INSERT INTO `think_log` VALUES ('306', '16', '主任', '用户【主任】登录成功', '127.0.0.1', '1', '1486694116');
+INSERT INTO `think_log` VALUES ('307', '1', 'admin', '用户【admin】登录成功', '127.0.0.1', '1', '1486700017');
+INSERT INTO `think_log` VALUES ('308', '1', 'admin', '用户【admin】登录成功', '127.0.0.1', '1', '1487667322');
+INSERT INTO `think_log` VALUES ('309', '16', '主任', '用户【主任】登录成功', '127.0.0.1', '1', '1487667390');
+INSERT INTO `think_log` VALUES ('310', null, 'admin', '用户【学生】添加成功', '127.0.0.1', '1', '1487907470');
+INSERT INTO `think_log` VALUES ('311', null, 'admin', '用户【tjl】编辑成功', '127.0.0.1', '1', '1487907485');
+INSERT INTO `think_log` VALUES ('312', '17', '学生', '用户【学生】登录成功', '127.0.0.1', '1', '1487907519');
+INSERT INTO `think_log` VALUES ('313', '17', '学生', '用户【学生】登录成功', '127.0.0.1', '1', '1487908031');
+INSERT INTO `think_log` VALUES ('314', '1', 'admin', '用户【admin】登录成功', '127.0.0.1', '1', '1488782613');
+INSERT INTO `think_log` VALUES ('315', '18', '1234', '用户【1234】登录失败：密码错误', '127.0.0.1', '2', '1488782716');
+INSERT INTO `think_log` VALUES ('316', null, 'admin', '用户【1234】编辑成功', '127.0.0.1', '1', '1488782726');
+INSERT INTO `think_log` VALUES ('317', '18', '1234', '用户【1234】登录失败：密码错误', '127.0.0.1', '2', '1488782731');
+INSERT INTO `think_log` VALUES ('318', '18', '1234', '用户【1234】登录失败：密码错误', '127.0.0.1', '2', '1488782747');
+INSERT INTO `think_log` VALUES ('319', '18', '1234', '用户【1234】登录失败：密码错误', '127.0.0.1', '2', '1488782754');
+INSERT INTO `think_log` VALUES ('320', '17', '学生', '用户【学生】登录成功', '127.0.0.1', '1', '1488782760');
+INSERT INTO `think_log` VALUES ('321', '17', '学生', '用户【学生】登录成功', '127.0.0.1', '1', '1488782771');
+INSERT INTO `think_log` VALUES ('322', '17', '学生', '用户【学生】登录成功', '127.0.0.1', '1', '1488782789');
+INSERT INTO `think_log` VALUES ('323', '1', 'admin', '用户【admin】删除管理员成功(ID=20)', '127.0.0.1', '1', '1488782991');
+INSERT INTO `think_log` VALUES ('324', '1', 'admin', '用户【admin】删除管理员成功(ID=18)', '127.0.0.1', '1', '1488782994');
+INSERT INTO `think_log` VALUES ('325', '1', 'admin', '用户【admin】添加用户关联成功', '127.0.0.1', '1', '1488783684');
+INSERT INTO `think_log` VALUES ('326', null, 'admin', '用户【学生1】添加成功', '127.0.0.1', '1', '1488783684');
+INSERT INTO `think_log` VALUES ('327', '17', '学生', '用户【学生】登录成功', '127.0.0.1', '1', '1488783696');
+INSERT INTO `think_log` VALUES ('328', '17', '学生', '用户【学生】登录成功', '127.0.0.1', '1', '1488783874');
+INSERT INTO `think_log` VALUES ('329', '17', '学生', '用户【学生】登录成功', '127.0.0.1', '1', '1488783960');
+INSERT INTO `think_log` VALUES ('330', '30', '学生1', '用户【学生1】登录成功', '127.0.0.1', '1', '1488784013');
+INSERT INTO `think_log` VALUES ('331', '16', '主任', '用户【主任】登录成功', '127.0.0.1', '1', '1488784177');
+INSERT INTO `think_log` VALUES ('332', '1', 'admin', '用户【admin】添加菜单成功', '127.0.0.1', '1', '1488784461');
+INSERT INTO `think_log` VALUES ('333', '1', 'admin', '用户【admin】添加菜单成功', '127.0.0.1', '1', '1488784602');
+INSERT INTO `think_log` VALUES ('334', '1', 'admin', '用户【admin】编辑菜单成功', '127.0.0.1', '1', '1488784702');
+INSERT INTO `think_log` VALUES ('335', '1', 'admin', '用户【admin】编辑菜单成功', '127.0.0.1', '1', '1488784711');
+INSERT INTO `think_log` VALUES ('336', '1', 'admin', '用户【admin】添加菜单成功', '127.0.0.1', '1', '1488784812');
+INSERT INTO `think_log` VALUES ('337', '1', 'admin', '用户【admin】编辑菜单成功', '127.0.0.1', '1', '1488784824');
+INSERT INTO `think_log` VALUES ('338', '1', 'admin', '用户【admin】登录成功', '127.0.0.1', '1', '1488785384');
+INSERT INTO `think_log` VALUES ('339', '1', 'admin', '用户【admin】添加菜单成功', '127.0.0.1', '1', '1488785640');
+INSERT INTO `think_log` VALUES ('340', '16', '主任', '用户【主任】登录成功', '127.0.0.1', '1', '1488788687');
+INSERT INTO `think_log` VALUES ('341', '1', 'admin', '用户【admin】添加菜单成功', '127.0.0.1', '1', '1488789207');
+INSERT INTO `think_log` VALUES ('342', '1', 'admin', '用户【admin】添加菜单成功', '127.0.0.1', '1', '1488789238');
+INSERT INTO `think_log` VALUES ('343', '1', 'admin', '用户【admin】添加菜单成功', '127.0.0.1', '1', '1488789268');
+INSERT INTO `think_log` VALUES ('344', '1', 'admin', '用户【admin】添加菜单成功', '127.0.0.1', '1', '1488789293');
+INSERT INTO `think_log` VALUES ('345', '1', 'admin', '用户【admin】删除菜单成功', '127.0.0.1', '1', '1488789362');
+INSERT INTO `think_log` VALUES ('346', '1', 'admin', '用户【admin】删除菜单成功', '127.0.0.1', '1', '1488789368');
+INSERT INTO `think_log` VALUES ('347', '1', 'admin', '用户【admin】删除菜单成功', '127.0.0.1', '1', '1488789372');
+INSERT INTO `think_log` VALUES ('348', '1', 'admin', '用户【admin】删除菜单成功', '127.0.0.1', '1', '1488789377');
 
 -- ----------------------------
 -- Table structure for think_member
@@ -269,3 +384,110 @@ INSERT INTO `think_member` VALUES ('212052', '1246470984', 'd41d8cd98f00b204e980
 INSERT INTO `think_member` VALUES ('212053', '18793189097', 'd41d8cd98f00b204e9800998ecf8427e', '', '25773', '7373737', '77', '1476433452', '0.0.0.0', '1476433452', '0.0.0.0', '1', '1', '7373733', '0', '', '1', '2016-10-10', '');
 INSERT INTO `think_member` VALUES ('212060', '1246470984', 'e10adc3949ba59abbe56e057f20f883e', 'uploads/face/1476694804/20090106103716418.jpg', 'XiYu', '100', '100', '1476694831', '0.0.0.0', '1476694831', '0.0.0.0', '1', '1', '18793189091', '0', '', '2', '1996-10-17', '');
 INSERT INTO `think_member` VALUES ('212064', '', '', 'http://wx.qlogo.cn/mmopen/WS5af6DwbzhvoKlOnV589huTP4nBWhMAEVzVI4gdCUQF0Kpc3FVXrkibWudHhYch2hPaXI4Jrs4ibppBGlSquM4x7abIdibnHgf/0', '烟勤话少脾气好', '0', '0', '0', '', '0', '', '0', '0', '', '0', '', '0', '', 'o0n73s5lR1WClmv3ujC0XU22IRnc');
+
+-- ----------------------------
+-- Table structure for think_room
+-- ----------------------------
+DROP TABLE IF EXISTS `think_room`;
+CREATE TABLE `think_room` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `room` varchar(255) CHARACTER SET gbk NOT NULL COMMENT '教室名',
+  `week` int(3) unsigned NOT NULL DEFAULT '0' COMMENT '表示星期几  位1，2，3...，7    1表示有课 0 表示无',
+  PRIMARY KEY (`id`,`room`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4 COMMENT='教室状态表';
+
+-- ----------------------------
+-- Records of think_room
+-- ----------------------------
+INSERT INTO `think_room` VALUES ('1', '教2A100', '0');
+INSERT INTO `think_room` VALUES ('2', '教2A102', '0');
+INSERT INTO `think_room` VALUES ('3', '教2A104', '0');
+INSERT INTO `think_room` VALUES ('4', '教2A106', '0');
+
+-- ----------------------------
+-- Table structure for think_student
+-- ----------------------------
+DROP TABLE IF EXISTS `think_student`;
+CREATE TABLE `think_student` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `snum` char(12) NOT NULL DEFAULT '' COMMENT '学号',
+  `name` varchar(30) NOT NULL DEFAULT '' COMMENT '姓名',
+  `email` varchar(30) NOT NULL DEFAULT '' COMMENT '邮箱 接收通知',
+  PRIMARY KEY (`Id`)
+) ENGINE=MyISAM AUTO_INCREMENT=2 DEFAULT CHARSET=utf8 COMMENT='学生表';
+
+-- ----------------------------
+-- Records of think_student
+-- ----------------------------
+INSERT INTO `think_student` VALUES ('1', '201345509122', '朱鑫飚', '446100702@qq.com');
+
+-- ----------------------------
+-- Table structure for think_teacher
+-- ----------------------------
+DROP TABLE IF EXISTS `think_teacher`;
+CREATE TABLE `think_teacher` (
+  `id` int(255) NOT NULL AUTO_INCREMENT,
+  `name` varchar(30) CHARACTER SET gbk NOT NULL,
+  `phone` char(11) CHARACTER SET gbk NOT NULL,
+  `address` varchar(255) CHARACTER SET gbk NOT NULL,
+  PRIMARY KEY (`id`)
+) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COMMENT='教师信息表';
+
+-- ----------------------------
+-- Records of think_teacher
+-- ----------------------------
+INSERT INTO `think_teacher` VALUES ('1', '张三', '12345678910', '地球');
+INSERT INTO `think_teacher` VALUES ('2', '李四', '11111111111', '中国');
+INSERT INTO `think_teacher` VALUES ('3', '王五', '22222222222', '浙江省');
+
+-- ----------------------------
+-- Table structure for think_teacher_cid
+-- ----------------------------
+DROP TABLE IF EXISTS `think_teacher_cid`;
+CREATE TABLE `think_teacher_cid` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `tnum` int(11) NOT NULL DEFAULT '-1' COMMENT '教师号',
+  `cid` int(11) NOT NULL DEFAULT '0' COMMENT '课程号',
+  PRIMARY KEY (`Id`),
+  KEY `tnum` (`tnum`,`cid`),
+  KEY `cid` (`cid`),
+  KEY `tid` (`tnum`) USING BTREE
+) ENGINE=MyISAM AUTO_INCREMENT=6 DEFAULT CHARSET=utf8mb4 COMMENT='教师-课程';
+
+-- ----------------------------
+-- Records of think_teacher_cid
+-- ----------------------------
+INSERT INTO `think_teacher_cid` VALUES ('1', '1', '1');
+INSERT INTO `think_teacher_cid` VALUES ('2', '2', '2');
+INSERT INTO `think_teacher_cid` VALUES ('3', '3', '3');
+INSERT INTO `think_teacher_cid` VALUES ('4', '3', '4');
+INSERT INTO `think_teacher_cid` VALUES ('5', '3', '2');
+
+-- ----------------------------
+-- Table structure for think_timetables
+-- ----------------------------
+DROP TABLE IF EXISTS `think_timetables`;
+CREATE TABLE `think_timetables` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `cid` int(11) NOT NULL DEFAULT '0' COMMENT '课程号',
+  `tid` int(11) NOT NULL COMMENT '教师id',
+  `classid` int(30) unsigned zerofill NOT NULL DEFAULT '000000000000000000000000000000' COMMENT '班级ID',
+  `room` int(255) unsigned zerofill NOT NULL COMMENT '教室id',
+  `num` tinyint(1) NOT NULL DEFAULT '0' COMMENT '节数 1，3，5，7，9:晚自修',
+  `week` int(1) NOT NULL DEFAULT '0' COMMENT '星期',
+  PRIMARY KEY (`Id`),
+  UNIQUE KEY `class` (`classid`,`num`,`week`) USING BTREE COMMENT '保持班级时间唯一性',
+  UNIQUE KEY `teacher` (`tid`,`num`,`week`) USING BTREE COMMENT '保持教师时间唯一性',
+  UNIQUE KEY `room` (`room`,`num`,`week`) USING BTREE COMMENT '保持教室时间唯一性',
+  KEY `tid_cid` (`tid`,`cid`)
+) ENGINE=MyISAM AUTO_INCREMENT=11 DEFAULT CHARSET=utf8 COMMENT='课程表';
+
+-- ----------------------------
+-- Records of think_timetables
+-- ----------------------------
+INSERT INTO `think_timetables` VALUES ('2', '2', '3', '000000000000000000000000000001', '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002', '3', '2');
+INSERT INTO `think_timetables` VALUES ('3', '3', '3', '000000000000000000000000000002', '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000003', '5', '3');
+INSERT INTO `think_timetables` VALUES ('4', '1', '1', '000000000000000000000000000001', '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002', '1', '4');
+INSERT INTO `think_timetables` VALUES ('5', '3', '3', '000000000000000000000000000001', '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001', '1', '2');
+INSERT INTO `think_timetables` VALUES ('9', '1', '1', '000000000000000000000000000002', '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000002', '9', '1');
+INSERT INTO `think_timetables` VALUES ('10', '1', '1', '000000000000000000000000000001', '000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000001', '1', '1');
