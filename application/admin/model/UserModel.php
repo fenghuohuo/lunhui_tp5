@@ -2,6 +2,7 @@
 
 namespace app\admin\model;
 use think\Model;
+use think\DB;
 
 class UserModel extends Model
 {
