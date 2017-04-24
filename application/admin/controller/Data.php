@@ -10,7 +10,7 @@ class Data extends Base
 {
     /**
      * 数据备份首页
-     * @author 田建龙 <864491238@qq.com>
+     * @author 朱鑫飚 <864491238@qq.com>
      */
     public function index() {
         $Db = Db::connect();
@@ -26,7 +26,7 @@ class Data extends Base
      * @param  String  $ids 表名
      * @param  Integer $id     表ID
      * @param  Integer $start  起始行数
-     * @author 田建龙 <864491238@qq.com>
+     * @author 朱鑫飚 <864491238@qq.com>
      */
     public function export($ids = null, $id = null, $start = null) {
         $Request = Request::instance();

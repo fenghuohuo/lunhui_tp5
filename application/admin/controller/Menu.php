@@ -9,7 +9,7 @@ class Menu extends Base
     /**
      * [index 菜单列表]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function index()
     {
@@ -25,7 +25,7 @@ class Menu extends Base
     /**
      * [add_rule 添加菜单]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
 	public function add_rule()
     {
@@ -43,7 +43,7 @@ class Menu extends Base
     /**
      * [edit_rule 编辑菜单]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function edit_rule()
     {
@@ -62,7 +62,7 @@ class Menu extends Base
     /**
      * [roleDel 删除角色]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function del_rule()
     {
@@ -77,7 +77,7 @@ class Menu extends Base
     /**
      * [ruleorder 排序]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function ruleorder()
     {
@@ -95,7 +95,7 @@ class Menu extends Base
     /**
      * [rule_state 菜单状态]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function rule_state()
     {

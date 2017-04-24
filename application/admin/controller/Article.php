@@ -12,7 +12,7 @@ class Article extends Base
     /**
      * [index 文章列表]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function index(){
 
@@ -48,7 +48,7 @@ class Article extends Base
     /**
      * [userAdd 添加文章]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function add_article()
     {
@@ -67,7 +67,7 @@ class Article extends Base
     /**
      * [index_cate 分类列表]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function index_cate(){
 
@@ -81,7 +81,7 @@ class Article extends Base
     /**
      * [add_cate 添加分类]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function add_cate()
     {
@@ -100,7 +100,7 @@ class Article extends Base
     /**
      * [edit_cate 编辑分类]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function edit_cate()
     {
@@ -122,7 +122,7 @@ class Article extends Base
     /**
      * [UserDel 删除分类]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function del_cate()
     {
@@ -137,7 +137,7 @@ class Article extends Base
     /**
      * [user_state 分类状态]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function cate_state()
     {

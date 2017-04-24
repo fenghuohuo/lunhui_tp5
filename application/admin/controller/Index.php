@@ -13,7 +13,7 @@ class Index extends Base
     /**
      * [indexPage 后台首页]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function indexPage()
     {

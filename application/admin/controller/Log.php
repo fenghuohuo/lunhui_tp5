@@ -10,7 +10,7 @@ class Log extends Base
     /**
      * [operate_log 操作日志]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function operate_log()
     {
@@ -46,7 +46,7 @@ class Log extends Base
     /**
      * [del_log 删除日志]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function del_log()
     {
