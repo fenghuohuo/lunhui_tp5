@@ -1,8 +1,8 @@
 <?php
 
 namespace app\admin\controller;
-use app\admin\Model\ArticleCateModel;
-use app\admin\Model\ArticleModel;
+use app\admin\model\ArticleCateModel;
+use app\admin\model\ArticleModel;
 use think\Db;
 
 class Article extends Base

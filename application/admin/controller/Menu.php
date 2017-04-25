@@ -1,7 +1,7 @@
 <?php
 
 namespace app\admin\controller;
-use app\admin\Model\MenuModel;
+use app\admin\model\MenuModel;
 use think\Db;
 
 class Menu extends Base

@@ -9,9 +9,9 @@ namespace app\admin\controller;
 
 use app\admin\model\ClassModel;
 use app\admin\model\CourseModel;
-use app\admin\model\RoomModel;
-use app\admin\model\TeacherModel;
-use app\admin\model\TimeTableModel;
+use app\admin\model\Roommodel;
+use app\admin\model\Teachermodel;
+use app\admin\model\TimeTablemodel;
 use think\Db;
 
 class Student extends Base
@@ -25,7 +25,7 @@ class Student extends Base
         $classid = isset($_GET['class']) ? $_GET['class'] : '';
         $class = $classid;
         if ($classid) {
-            $class = ClassModel::get($classid);
+            $class = Classmodel::get($classid);
             $class = $class->major . $class->class;
         }
 
@@ -40,13 +40,13 @@ class Student extends Base
     {
         $list = [];
         if ($class) {
-            $timetable = TimeTableModel::all(['classid' => $class]);
+            $timetable = TimeTablemodel::all(['classid' => $class]);
 
             foreach ($timetable as $value) {
                 $cid = $value['cid'];
                 $roomid = $value['room'];
-                $room = RoomModel::where('id', $roomid)->column('room');
-                $cname = CourseModel::where('cid', $cid)->column('cname');
+                $room = Roommodel::where('id', $roomid)->column('room');
+                $cname = Coursemodel::where('cid', $cid)->column('cname');
 
                 $list[] = [
                     'week' => $value['week'],
@@ -78,7 +78,7 @@ class Student extends Base
 
         foreach ($week as $value) {
             foreach ($parts as $part) {
-                $timetable = new TimeTableModel();
+                $timetable = new TimeTablemodel();
                 $timetable->cid = $course;
                 $timetable->classid = $class;
                 $timetable->room = $room;
@@ -112,7 +112,7 @@ class Student extends Base
         $week = $time[0];
         $num = $time[1];
 
-        $timeTable = new TimeTableModel();
+        $timeTable = new TimeTablemodel();
         $timeTable = $timeTable
             ->where('week', $week)
             ->where('num', $num)
@@ -120,13 +120,13 @@ class Student extends Base
 
         if ($timeTable) {
             $cid = $timeTable->cid;
-            $cname = CourseModel::get(['cid' => $cid]);
+            $cname = Coursemodel::get(['cid' => $cid]);
             $classid = $timeTable->classid;
-            $class = ClassModel::get(['id' => $classid]);
+            $class = Classmodel::get(['id' => $classid]);
             $roomid = $timeTable->room;
-            $room = RoomModel::get(['id' => $roomid]);
+            $room = Roommodel::get(['id' => $roomid]);
             $tid = $timeTable->tid;
-            $teacher = TeacherModel::get(['id' => $tid]);
+            $teacher = Teachermodel::get(['id' => $tid]);
             $list = [
                 'course' => [
                     'id' => $timeTable->cid,
@@ -174,7 +174,7 @@ class Student extends Base
         $week = $time[0];
         $num = $time[1];
 
-        $timeTable = new TimeTableModel();
+        $timeTable = new TimeTablemodel();
         $timeTable = $timeTable
             ->where('week', $week)
             ->where('num', $num)
@@ -215,7 +215,7 @@ class Student extends Base
         $week = $time[0];
         $num = $time[1];
 
-        $timeTable = new TimeTableModel();
+        $timeTable = new TimeTablemodel();
         $id = $timeTable
             ->where('week', $week)
             ->where('num', $num)
@@ -243,7 +243,7 @@ class Student extends Base
 
         if ($classid) {
             $this->getTimeTable($classid);
-            $class = ClassModel::get($classid);
+            $class = Classmodel::get($classid);
             $this->assign('class', $class->major . $class->class);
             return $this->fetch('student\timetablestudent');
         } else {
@@ -259,7 +259,7 @@ class Student extends Base
      */
     public function getCourse()
     {
-        $course = new CourseModel();
+        $course = new Coursemodel();
         $result = [];
         $table = $course->getCourse();
 
@@ -279,7 +279,7 @@ class Student extends Base
      */
     public function getClass()
     {
-        $course = new ClassModel();
+        $course = new Classmodel();
         $result = [];
         $table = $course->getClass();
 
@@ -301,7 +301,7 @@ class Student extends Base
      */
     public function getRoom()
     {
-        $course = new RoomModel();
+        $course = new Roommodel();
         $table = $course->getRooms();
         $result = [];
 
@@ -321,7 +321,7 @@ class Student extends Base
      */
     public function getTeacher()
     {
-        $tmp = new TeacherModel();
+        $tmp = new Teachermodel();
         $num = $_GET['num'];
         $teachers = $tmp->getTeacher($num);
         $result = [];
