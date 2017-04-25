@@ -9,9 +9,9 @@ namespace app\admin\controller;
 
 use app\admin\model\ClassModel;
 use app\admin\model\CourseModel;
-use app\admin\model\Roommodel;
-use app\admin\model\Teachermodel;
-use app\admin\model\TimeTablemodel;
+use app\admin\model\RoomModel;
+use app\admin\model\TeacherModel;
+use app\admin\model\TimeTableModel;
 use think\Db;
 
 class Student extends Base
