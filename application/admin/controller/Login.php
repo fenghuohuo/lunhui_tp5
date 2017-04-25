@@ -100,7 +100,8 @@ class Login extends Controller
     {
         $username = "学生1";
         $password = "123456";
-        $result = $this->validate(compact('username', 'password'), 'AdminValidate');
+        $code = "1234";
+        $result = $this->validate(compact('username', 'password', 'code'), 'AdminValidate');
         if(true !== $result){
             return json(['code' => -5, 'data' => '', 'msg' => $result]);
         }
