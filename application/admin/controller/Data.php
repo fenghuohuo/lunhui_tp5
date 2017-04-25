@@ -118,10 +118,10 @@ class Data extends Base
 
             $list = $Db->query("OPTIMIZE TABLE `{$ids}`");
             if($list){
-                $this->success("数据表'{$ids}'优化完成！");
+                $this->success("数据表'{$ids}'优化完成！" . $list[0]['Msg_text']);
                 //return json("数据表'{$ids}'优化完成！");
             } else {
-                $this->error("数据表'{$ids}'优化出错请重试！");
+                $this->error("数据表'{$ids}'优化出错请重试！" . $list[0]['Msg_text']);
             }
         }
     }
