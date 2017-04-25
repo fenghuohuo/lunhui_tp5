@@ -33,7 +33,7 @@ class Student extends Base
         $this->assign('class', $class);
         $this->assign('classid', $classid);
 
-        return $this->fetch('student\index');
+        return $this->fetch('student/index');
     }
 
     private function getTimeTable($class)
@@ -245,10 +245,10 @@ class Student extends Base
             $this->getTimeTable($classid);
             $class = Classmodel::get($classid);
             $this->assign('class', $class->major . $class->class);
-            return $this->fetch('student\timetablestudent');
+            return $this->fetch('student/timetablestudent');
         } else {
             $this->assign('list', '');
-            return $this->fetch('student\timetablestudent');
+            return $this->fetch('student/timetablestudent');
         }
 
     }
