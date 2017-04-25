@@ -148,7 +148,7 @@ class Data extends Base
             }
         } else {
             $data = $Db->query("REPAIR TABLE `{$ids}`");
-            if($list){
+            if($data){
                 $this->success("数据表'{$ids}'修复完成！");
                 //return json("数据表'{$ids}'优化完成！");
             } else {
