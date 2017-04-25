@@ -1,7 +1,7 @@
 <?php
 
 namespace app\admin\controller;
-use app\admin\Model\LogModel;
+use app\admin\model\LogModel;
 use think\Db;
 
 class Log extends Base

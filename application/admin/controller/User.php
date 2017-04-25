@@ -1,7 +1,7 @@
 <?php
 
 namespace app\admin\controller;
-use app\admin\Model\UserModel;
+use app\admin\model\UserModel;
 use app\admin\model\UserType;
 use app\admin\model\AuthGroupAccessModel;
 use think\Db;
