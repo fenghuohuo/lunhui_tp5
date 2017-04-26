@@ -140,7 +140,7 @@ class Login extends Controller
 
         Db::name('admin')->where('id', $hasUser['id'])->update($param);
         writelog($hasUser['id'],session('username'),'用户【'.session('username').'】登录成功',1);
-        return $this->fetch('index/index');
+        return $this->redirect('index/index');
 //        return json(['code' => 1, 'data' => url('index/index'), 'msg' => '登录成功']);
     }
 }
