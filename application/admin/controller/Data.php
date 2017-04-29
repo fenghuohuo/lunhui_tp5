@@ -10,7 +10,7 @@ class Data extends Base
 {
     /**
      * 数据备份首页
-     * @author 田建龙 <864491238@qq.com>
+     * @author 朱鑫飚 <864491238@qq.com>
      */
     public function index() {
         $Db = Db::connect();
@@ -26,7 +26,7 @@ class Data extends Base
      * @param  String  $ids 表名
      * @param  Integer $id     表ID
      * @param  Integer $start  起始行数
-     * @author 田建龙 <864491238@qq.com>
+     * @author 朱鑫飚 <864491238@qq.com>
      */
     public function export($ids = null, $id = null, $start = null) {
         $Request = Request::instance();
@@ -118,10 +118,10 @@ class Data extends Base
 
             $list = $Db->query("OPTIMIZE TABLE `{$ids}`");
             if($list){
-                $this->success("数据表'{$ids}'优化完成！");
+                $this->success("数据表'{$ids}'优化完成！" . $list[0]['Msg_text']);
                 //return json("数据表'{$ids}'优化完成！");
             } else {
-                $this->error("数据表'{$ids}'优化出错请重试！");
+                $this->error("数据表'{$ids}'优化出错请重试！" . $list[0]['Msg_text']);
             }
         }
     }
@@ -148,7 +148,7 @@ class Data extends Base
             }
         } else {
             $data = $Db->query("REPAIR TABLE `{$ids}`");
-            if($list){
+            if($data){
                 $this->success("数据表'{$ids}'修复完成！");
                 //return json("数据表'{$ids}'优化完成！");
             } else {

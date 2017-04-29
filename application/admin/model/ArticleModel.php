@@ -14,7 +14,7 @@ class ArticleModel extends Model
 
     /**
      * 根据搜索条件获取用户列表信息
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function getArticleByWhere($map, $Nowpage, $limits)
     {
@@ -24,7 +24,7 @@ class ArticleModel extends Model
     
     /**
      * [insertCate 添加分类]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function insertCate($param)
     {
@@ -44,7 +44,7 @@ class ArticleModel extends Model
 
     /**
      * [editMenu 编辑分类]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function editCate($param)
     {
@@ -64,7 +64,7 @@ class ArticleModel extends Model
 
     /**
      * [getOneMenu 根据分类id获取一条信息]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function getOneCate($id)
     {
@@ -75,7 +75,7 @@ class ArticleModel extends Model
 
     /**
      * [delMenu 删除分类]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function delCate($id)
     {

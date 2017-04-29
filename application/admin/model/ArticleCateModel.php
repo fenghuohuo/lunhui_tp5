@@ -14,7 +14,7 @@ class ArticleCateModel extends Model
 
     /**
      * [getAllCate 获取全部分类]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function getAllCate()
     {
@@ -24,7 +24,7 @@ class ArticleCateModel extends Model
 
     /**
      * [insertCate 添加分类]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function insertCate($param)
     {
@@ -44,7 +44,7 @@ class ArticleCateModel extends Model
 
     /**
      * [editMenu 编辑分类]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function editCate($param)
     {
@@ -65,7 +65,7 @@ class ArticleCateModel extends Model
     /**
      * [getOneMenu 根据分类id获取一条信息]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function getOneCate($id)
     {
@@ -77,7 +77,7 @@ class ArticleCateModel extends Model
     /**
      * [delMenu 删除分类]
      * @return [type] [description]
-     * @author [田建龙] [864491238@qq.com]
+     * @author [朱鑫飚] [864491238@qq.com]
      */
     public function delCate($id)
     {

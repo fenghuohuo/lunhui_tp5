@@ -1,4 +1,6 @@
 <?php
 
 
-return [];
+return [
+	'app\admin\command\Test'
+];
