@@ -144,7 +144,7 @@ class Auth{
      *     ...)   
      */
     public function getGroups($uid) {
-        static $groups = array();
+        static $groups = array(); 
         if (isset($groups[$uid]))
             return $groups[$uid];
         $user_groups = \think\Db::table('think_auth_group_access')
