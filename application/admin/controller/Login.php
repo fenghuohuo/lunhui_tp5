@@ -26,12 +26,12 @@ class Login extends Controller
             return json(['code' => -5, 'data' => '', 'msg' => $result]);
         }
 
-        //测试阶段 取消校验 验证码
-//        $verify = new Verify();
-//        if (!$verify->check($code)) {
-//
-//            return json(['code' => -4, 'data' => '', 'msg' => '验证码错误']);
-//        }
+//        测试阶段 取消校验 验证码
+        $verify = new Verify();
+        if (!$verify->check($code)) {
+
+            return json(['code' => -4, 'data' => '', 'msg' => '验证码错误']);
+        }
 
         $hasUser = db('admin')->where('username', $username)->find();
         if(empty($hasUser)){
